@@ -11,6 +11,6 @@ El juego está inspirado en el conocido título The Binding of Isaac. Se trata d
 ## Integrantes
 
 * Lisandro Rios
-* Ulises Zagarte
+* Ulises Zagare
 * Valentino Salguero
 * Elias ApellidoconS :)
