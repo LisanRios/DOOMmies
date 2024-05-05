@@ -6,7 +6,7 @@
 
 Este repositorio tiene como objetivo crear un juego en el lenguaje Wollok para la materia Algoritmos 1 de la carrera de Tecnicatura en Programación Informática de la Universidad Nacional de San Martín (UNSAM).
 
-El juego está inspirado en el conocido título The Binding of Isaac. Se trata de un juego de acción RPG con fuertes elementos de tipo Roguelike, en el cual los niveles se generan aleatoriamente.
+El juego está inspirado en el conocido título The Binding of Isaac. Se trata de un juego de acción RPG con fuertes elementos de tipo Roguelike, en el cual los niveles se generan aleatoriamente. Pero a diferencia del mismo ESTE TIENE PERSONAJES DEL DOOM!!!
 
 ## Integrantes
 
