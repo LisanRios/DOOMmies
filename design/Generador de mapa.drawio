@@ -1,0 +1,441 @@
+<mxfile host="Electron" modified="2024-05-05T16:39:32.330Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="-U08ZqhTtQfMPMGiIeLc" version="23.1.5" type="device">
+  <diagram name="Página-1" id="exHdPKzXp46PXKM5RkSk">
+    <mxGraphModel dx="1857" dy="1173" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-1" value="World" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="200" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-2" value="Lista de Habitaciones" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-1">
+          <mxGeometry x="10" y="30" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-3" value="Lista de espacios disponibles" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-1">
+          <mxGeometry x="10" y="60" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-63" value="Lista de espacios ocupados" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-1">
+          <mxGeometry x="10" y="90" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-135" value="cambiarHabitacion()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-1">
+          <mxGeometry x="10" y="150" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-146" value="Puntero a habitacion actual" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-1">
+          <mxGeometry x="10" y="120" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-147" value="cambiarHabitacionAdyacente()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-1">
+          <mxGeometry x="10" y="180" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-4" value="Habitacion" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="200" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-5" value="Posicion" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-4">
+          <mxGeometry x="10" y="30" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-6" value="Punteros a habitaciones adyacentes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-4">
+          <mxGeometry x="10" y="60" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-54" value="activar_habitacion()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-4">
+          <mxGeometry x="10" y="100" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-55" value="desactivar_habitacion()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-4">
+          <mxGeometry x="10" y="130" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-163" value="habitacion_adyacente(dir)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-4">
+          <mxGeometry x="10" y="160" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-7" value="Habitaciones" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="90" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-8" value="Habitacion 1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-7">
+          <mxGeometry y="20" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-9" value="Habitacion 2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-7">
+          <mxGeometry y="40" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-10" value="Habitacion 3" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-7">
+          <mxGeometry y="60" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-13" value=". . ." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-7">
+          <mxGeometry y="80" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-14" value="Habitacion n" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-7">
+          <mxGeometry y="100" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-2" target="LsWzAVdbh_QQpRXNimG9-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-16" target="LsWzAVdbh_QQpRXNimG9-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-16" value="Generar Mundo" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="360" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-19" target="LsWzAVdbh_QQpRXNimG9-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-19" value="Instanciar habitacion HabitacionPlayerSpawn en posicion (0, 0)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="440" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-22" target="LsWzAVdbh_QQpRXNimG9-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-22" target="LsWzAVdbh_QQpRXNimG9-42">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="860" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="310" y="620" />
+              <mxPoint x="310" y="820" />
+              <mxPoint x="180" y="820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-22" value="for i in range(0, MAX_HABITACIONES)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="600" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-24" target="LsWzAVdbh_QQpRXNimG9-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-24" value="pos = Elegir posicion aleatoria en la lista de espacios disponibles" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="680" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-26" target="LsWzAVdbh_QQpRXNimG9-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-26" value="Precalcular los tipos de habitacion" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="520" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-29" target="LsWzAVdbh_QQpRXNimG9-22">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="50" y="780" />
+              <mxPoint x="50" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-29" value="Instanciar habitacion tipo tiposHabitacion[i] en posicion pos" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="760" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-35" value="Espacios disponibles" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="220" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-36" value="(0, 1)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-35">
+          <mxGeometry y="20" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-37" value="(1, 0)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-35">
+          <mxGeometry y="40" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-38" value="(0, -1)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-35">
+          <mxGeometry y="60" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-39" value=". . ." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-35">
+          <mxGeometry y="80" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-40" value="(x, y)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-35">
+          <mxGeometry y="100" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-3" target="LsWzAVdbh_QQpRXNimG9-38">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="150" />
+              <mxPoint x="300" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-42" target="LsWzAVdbh_QQpRXNimG9-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-42" target="LsWzAVdbh_QQpRXNimG9-56">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="339.49" y="960.02" as="targetPoint" />
+            <mxPoint x="249.49" y="859.9967441860465" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-42" value="for habitacion in habitaciones" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="840" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-43">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="1040" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-43">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-43" value="Hay alguna habitacion arriba/abajo/al lado de esta?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="95" y="920" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-46" target="LsWzAVdbh_QQpRXNimG9-42">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="40" y="1070" />
+              <mxPoint x="40" y="860" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-46" value="Setear el puntero de habitacion adyacente a esa habitacion" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1040" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-49" value="Si" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="1000" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-50" value="No" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="970" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-51" value="Fin del bucle" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="590" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-52" value="Fin del bucle" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="265" y="830" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-56" target="LsWzAVdbh_QQpRXNimG9-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-56" value="Activar habitacion de spawn del jugador" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="940" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-57" value="Comenzar juego" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="1050" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-61" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-59" target="LsWzAVdbh_QQpRXNimG9-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-59" value="instanciarHabitacion(pos, tipo)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-72" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-60" target="LsWzAVdbh_QQpRXNimG9-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-60" value="new Habitacion(pos, tipo)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="120" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-64" value="Espacios ocupados" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="350" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-65" value="(0, 0)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-64">
+          <mxGeometry y="20" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-68" value=". . ." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-64">
+          <mxGeometry y="40" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-69" value="(x, y)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-64">
+          <mxGeometry y="60" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-63" target="LsWzAVdbh_QQpRXNimG9-68">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="180" />
+              <mxPoint x="290" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-74" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-71" target="LsWzAVdbh_QQpRXNimG9-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-71" value="Agregar pos a Espacios Ocupados, y quitar pos de los Espacios Disponibles" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="200" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-76" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-73" target="LsWzAVdbh_QQpRXNimG9-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-73" value="for cand_pos in [los lados de pos]" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="280" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-75" target="LsWzAVdbh_QQpRXNimG9-73">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="400" />
+              <mxPoint x="880" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-75">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1000.0000000000002" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-75" value="cand_pos esta en los espacios ocupados?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="360" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-78" value="Si" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="900" y="370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-80">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-83" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-80" target="LsWzAVdbh_QQpRXNimG9-82">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-80" value="Agregar cand_pos a los espacios disponibles" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="480" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-82" value="return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="560" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-84" value="No" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="950" y="440" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-106" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-104" target="LsWzAVdbh_QQpRXNimG9-105">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-104" value="Precalcular tipos de habitacion" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1141" y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-115" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-105" target="LsWzAVdbh_QQpRXNimG9-114">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-105" value="Llenar un array de MAX_HABITACIONES lugares con 0 = HabitacionNormal" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1151" y="120" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-108" value="tipoHabitaciones" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1461" y="120" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-109" value="HabitacionJefe" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-108">
+          <mxGeometry y="20" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-110" value="HabitacionPowerup" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-108">
+          <mxGeometry y="40" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-111" value="HabitacionTienda" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-108">
+          <mxGeometry y="60" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-112" value="HabitacionBatalla" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-108">
+          <mxGeometry y="80" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-113" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="LsWzAVdbh_QQpRXNimG9-108">
+          <mxGeometry y="100" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-119" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-114" target="LsWzAVdbh_QQpRXNimG9-118">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-114" value="for tipo in tipoHabitaciones" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1181" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-118">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1361" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-122" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-118" target="LsWzAVdbh_QQpRXNimG9-121">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-118" value="Habitacion tiene mas 0s?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1181" y="250" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-121" target="LsWzAVdbh_QQpRXNimG9-114">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1161" y="385" />
+              <mxPoint x="1161" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-121" value="Elige un 0 random y lo pisa con tipo" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1181" y="360" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-124" value="Si" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1231" y="330" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-125" value="No" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1291" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-126" value="Aca es importante que los tipos de habitacion esten ordenados, para que haya una prioridad, es mas importante spawnear la habitacion de jefe y que el mapa tenga un final que una habitacion de tienda." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1461" y="280" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-129" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-127" target="LsWzAVdbh_QQpRXNimG9-128">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1391" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-127" value="break" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1361" y="280" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-134" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-128" target="LsWzAVdbh_QQpRXNimG9-132">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-128" value="Cambia todos los ceros por HabitacionNormal" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1181" y="440" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-132" value="return tiposHabitcion" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1181" y="520" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-138" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-136" target="LsWzAVdbh_QQpRXNimG9-137">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-136" value="activarHabitacion()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="320" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-140" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-137" target="LsWzAVdbh_QQpRXNimG9-139">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-137" value="Agregar todas las instancias de esa habitacion como visual" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-139" value="Activar enemigos" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="480" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-141" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-142" target="LsWzAVdbh_QQpRXNimG9-144">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-142" value="desactivarHabitacion()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="320" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-143" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-144" target="LsWzAVdbh_QQpRXNimG9-145">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-144" value="Sacar todas las instancias de esa habitacion como visual" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-145" value="Desctivar enemigos" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="480" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-153" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-148" target="LsWzAVdbh_QQpRXNimG9-149">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-148" value="cambiarHabitacion(habitacion)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="560" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-154" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-149" target="LsWzAVdbh_QQpRXNimG9-150">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-149" value="habitacionActual.desactivarHabitacion()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="620" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-156" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-150" target="LsWzAVdbh_QQpRXNimG9-151">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-150" value="habitacionActual = habitacion" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="670" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-151" value="habitacionActual.activarHabitacion()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="720" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-160" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-157" target="LsWzAVdbh_QQpRXNimG9-158">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-157" value="cambiarHabitacionAdyacente(direccion)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="800" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-162" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LsWzAVdbh_QQpRXNimG9-158" target="LsWzAVdbh_QQpRXNimG9-161">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-158" value="h = habitacionActual.habitacion_adyacente(direccion)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="495" y="870" width="290" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LsWzAVdbh_QQpRXNimG9-161" value="cambiarHabitacion(h)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="930" width="140" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
