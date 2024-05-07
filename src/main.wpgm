@@ -1,0 +1,15 @@
+//Wollok es el decimo circulo del infierno
+//Los que cometan el Pecado Mortal de anotarse en TPI Unsam seran castigados a
+//programar en el lenguaje mas horrible por toda la eternidad. Fun with Objects!
+
+import wollok.game.*
+import graphics.*
+
+program abc {
+	game.width(9)
+	game.height(9)
+	
+	game.addVisual(TestAnimatedObject)
+	
+	game.start()
+}
