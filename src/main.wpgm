@@ -4,6 +4,7 @@
 
 import wollok.game.*
 import graphics.*
+import player.*
 
 program abc {
 	game.width(9)
