@@ -1,72 +1,29 @@
 import wollok.game.*
 
-// <DEBUG> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-class RoomBlockTest {
-	var property position = game.at(0,0)
-	var property tipo = HabitacionNormal
-	method image(){
-		if (tipo == HabitacionPlayerSpawn){
-			return "sprites/test/testsprite_5.png/"
-		}
-		if (tipo == HabitacionNormal){
-			return "sprites/test/testsprite_0.png"
-		}
-		else if (tipo == HabitacionJefe){
-			return "sprites/test/testsprite_3.png"
-		}
-		else if (tipo == HabitacionPowerup){
-			return "sprites/test/testsprite_6.png"
-		}	
-		return "null.png"
-	}
-}
-
-object testPlayer {
-	var property position = game.at(0,0)
-	var property habitacionActual = null;
-	method image() = "sprites/player/player_0.png/"
-	
-	method move(dir){
-		var newHabitacion = habitacionActual.adyacentes().get(dir)
-		if (newHabitacion != null){
-			habitacionActual = newHabitacion
-			
-			position = new Position(
-				x = habitacionActual.position().get(0)+7, 
-				y = habitacionActual.position().get(1)+7
-			)
-		}
-	}
-	
-	method initialize() {
-		keyboard.up().onPressDo({self.move(0)})
-		keyboard.right().onPressDo({self.move(1)})
-		keyboard.down().onPressDo({self.move(2)})
-		keyboard.left().onPressDo({self.move(3)})
-	}
-}
-
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< </DEBUG>
-
 //Objeto que maneja y genera el mundo
 object world {
 	var property habitaciones = []
 	var espacios_disponibles = [ [0,0] ]
 	var espacios_ocupados = []
 	
-	var habitacion_actual = null
+	var property habitacion_actual = null
 	var tipos_habitacion = []
 	
 	
-	method cambiarHabitacion() {
-		
+	method cambiarHabitacion(h) {
+		habitacion_actual.desactivar()
+		habitacion_actual = h
+		habitacion_actual.activar()
 	}
 	
-	method cambiarHacitacionAdyacente() {
-		
+	method cambiarHabitacionAdyacente(dir) {
+		var adyacente = habitacion_actual.habitacionAdyacente(dir)
+		if (adyacente != null) {
+			self.cambiarHabitacion(adyacente)
+		}
 	}
 	
-	method generarWorld(maxHabitaciones) {
+	method generateWorld(maxHabitaciones) {
 		tipos_habitacion = [
 			HabitacionJefe,
 			HabitacionPowerup
@@ -89,30 +46,10 @@ object world {
 		//Configura los punteros (de que habitacion va a que habitacion)
 		self.configurarPunteros()
 		
+		habitaciones.forEach({habitacion => habitacion.init()})
 		
-		//Esto es de debug para visualizar el mapa antes de hacer la cosa jugable
-		game.allVisuals().forEach({visual => game.removeVisual(visual)})
-		game.width(15)
-		game.height(15)
-		habitaciones.forEach({habitacion =>
-			var mapBlock = new RoomBlockTest()
-			mapBlock.tipo(habitacion.tipo())
-			game.addVisualIn(mapBlock, new Position(
-				x = habitacion.position().get(0) + 7,
-				y = habitacion.position().get(1) + 7
-			))
-		})
-		
-		game.addVisual(testPlayer)
-		testPlayer.position(
-			new Position(
-				x = habitaciones.first().position().get(0)+7, 
-				y = habitaciones.first().position().get(1)+7
-			)
-		)
-		testPlayer.habitacionActual(habitaciones.first())
-		
-		game.start()
+		habitacion_actual = habitaciones.first()
+		habitacion_actual.activar()
 	}
 	
 	//Toma un array [x, y] y devuelve un array con los lados del array
@@ -203,25 +140,72 @@ class Habitacion{
 	var property adyacentes = [null, null, null, null] //Arriba, Derecha, Abajo, Izquierda
 	var tipo = HabitacionNormal
 	
+	var entidades = []
+	
+	var posicionesPuertas = [
+		new Position(x = 7, y = 14),
+		new Position(x = 14, y = 7),
+		new Position(x = 7, y = 0),
+		new Position(x = 0, y = 7)
+	]
+	var posPlayerPuertas = [
+		new Position(x = 7, y = 1),
+		new Position(x = 1, y = 7),
+		new Position(x = 7, y = 13),
+		new Position(x = 13, y = 7)
+	]
+	
 	method position() = position
 	method tipo() = tipo
 	
-	method activarHabitacion(){
-		
+	method init() {
+		//Spawnea las puertas
+		var i = 0
+		adyacentes.forEach({ adj =>
+			if (adj != null) {
+				entidades.add(new Puerta(
+					direction = i, 
+					position = posicionesPuertas.get(i),
+					playerPos = posPlayerPuertas.get(i)
+				))
+			}
+			i+=1
+		})
 	}
 	
-	method desactivarHabitacion(){
-		
+	method activar(){
+		console.println(tipo.background())
+		game.ground(tipo.background())
+		entidades.forEach({entidad => game.addVisual(entidad)})
 	}
 	
-	method habitacionAdyacente(){
-		
+	method desactivar(){
+		entidades.forEach({entidad => game.removeVisual(entidad)})
+	}
+	
+	method habitacionAdyacente(lado){ //Arriba, Derecha, Abajo, Izquierda
+		return adyacentes.get(lado)
 	}
 }
 
-object HabitacionNormal {}
-object HabitacionPlayerSpawn{}
-object HabitacionJefe {}
-object HabitacionPowerup {}
-object HabitacionTienda {}
-object HabitacionDesafio {}
+class TipoHabitacion {
+	method background() = "backgrounds/infierno.png"
+}
+object HabitacionNormal inherits TipoHabitacion {
+	override method background() = "backgrounds/ladrillo.png"
+}
+object HabitacionPlayerSpawn inherits TipoHabitacion {}
+object HabitacionJefe inherits TipoHabitacion {
+	override method background() = "backgrounds/ladrillo.png"
+}
+object HabitacionPowerup inherits TipoHabitacion {}
+object HabitacionTienda inherits TipoHabitacion {}
+object HabitacionDesafio inherits TipoHabitacion {}
+
+class Puerta {
+	var property position = game.at(0,0)
+	var property direction = 0
+	var property playerPos = null
+	
+	method image() = "sprites/door/door_0.png"
+}

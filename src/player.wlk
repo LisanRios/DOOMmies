@@ -1,13 +1,13 @@
 import wollok.game.*
-
+import world.*
 
 class Player {
 	var vida = 100
 	var vivo = true
-	var posicion = game.at(1, 2)
+	var property position = game.at(1, 2)
 	const property inventario = #{}
 	
-	method imagen() = "DS_base.png"
+	method image() = "sprites/player/player_0.png"
 	
 	method ataque(arma) {
 		arma.usar()
@@ -31,20 +31,29 @@ class Player {
 		return vivo
 	}
 	
-	method derecha() {
-		posicion = posicion.right(1)
+	method move(dir){
+		if (dir == 0) position = position.up(1)
+		if (dir == 1) position = position.right(1)
+		if (dir == 2) position = position.down(1)
+		if (dir == 3) position = position.left(1)
+		
+		var col = game.colliders(self)
+		col.forEach({col =>
+			if (col.toString() == "un/a  Puerta") {
+				var d = col.direction()
+				position = col.playerPos()
+				world.cambiarHabitacionAdyacente(d)
+			}
+			
+			console.println(col.toString())
+		})
 	}
 	
-	method izquierda() {
-		posicion = posicion.left(1)
-	}
-	
-	method arriba() {
-		posicion = posicion.up(1)
-	}
-	
-	method abajo() {
-		posicion = posicion.down(1)
+	method initialize() {
+		keyboard.up().onPressDo({self.move(0)})
+		keyboard.right().onPressDo({self.move(1)})
+		keyboard.down().onPressDo({self.move(2)})
+		keyboard.left().onPressDo({self.move(3)})
 	}
 
 	method encontrarArma(arma) {
