@@ -10,9 +10,12 @@ class Player {
 	method image() = "sprites/player/player_0.png"
 	
 	method ataque(arma) {
+		if(inventario.contains(arma)){
 		arma.usar()
 		arma.municion()
 		return arma.danio()
+		}
+		return false
 	}
 	
 	method danio(cant) {
@@ -57,19 +60,19 @@ class Player {
 	}
 
 	method encontrarArma(arma) {
+		if (inventario.contains(arma)) arma.agregarMunicion(arma.municionBase())
 		inventario.add(arma)
 	}
 }
 
 class Armas {
-
 	method municion() = null
 	
 	method danio() = null
-
 }
 
 class Escopeta inherits Armas {
+	const property municionBase = 5
 	var municion = 5
 	const danio = 20
 	
@@ -77,27 +80,34 @@ class Escopeta inherits Armas {
 	
 	override method danio() = danio
 	
-	method usar() {
-		municion -= 1
+	method agregarMunicion(cant) {
+		municion += cant
 	}
 	
-	method agregarMunicion(cant) {
-		municion +=cant
+	method usar() {
+		municion -= 1
 	}
 }
 
 class Espada inherits Armas {
-	const municion = null
-	const danio = 5
+	const property municionBase = 0
+	var danio = 5
 	
-	override method municion() = municion
+	override method municion() = null
 	
 	override method danio() = danio
-
-	method usar() = 0
+	
+	method agregarMunicion(cant) {
+		danio += cant
+	}
+	
+	method usar() {
+		danio += municionBase
+	}
 }
 
 class Fusil inherits Armas {
+	const property municionBase = 14
 	var municion = 14
 	const danio = 10
 	
@@ -105,16 +115,17 @@ class Fusil inherits Armas {
 	
 	override method danio() = danio
 	
-	method usar() {
-		municion -= 1
+	method agregarMunicion(cant) {
+		municion += cant
 	}
 	
-	method agregarMunicion(cant) {
-		municion +=cant
-	}
+	method usar() {
+		municion -= 1
+	}	
 }
 
 class Automatica inherits Armas {
+	const property municionBase = 30
 	var municion = 30
 	const danio = 15
 
@@ -122,11 +133,11 @@ class Automatica inherits Armas {
 	
 	override method danio() = danio
 	
+	method agregarMunicion(cant) {
+		municion += cant
+	}
+	
 	method usar() {
 		municion -= 1
-	}
-
-	method agregarMunicion(cant) {
-		municion +=cant
 	}
 }
