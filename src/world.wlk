@@ -25,7 +25,7 @@ object world {
 	
 	method generateWorld(maxHabitaciones) {
 		tipos_habitacion = [
-			HabitacionJefe,
+			//HabitacionJefe, //Va a spawnear obligatoriamente en una habitacion en la punta
 			HabitacionPowerup
 		]
 		habitaciones.clear()
@@ -171,16 +171,32 @@ class Habitacion{
 			}
 			i+=1
 		})
+		
+		//Spawnea una plantilla de entidades
+		var temps = tipo.templates()
+		
+		if (not temps.isEmpty()) {
+			var template = temps.get(0.randomUpTo(temps.size()-1))
+			template.entradas().forEach({entrada => 
+				var entityId = entrada.get(0)
+				var pos = entrada.get(1)
+				
+				var newEntity = EntityIdSystem.newEntityById(entityId)
+				newEntity.position(pos)
+				
+				entidades.add(newEntity)
+			})
+		}
 	}
 	
 	method activar(){
 		console.println(tipo.background())
 		game.ground(tipo.background())
-		entidades.forEach({entidad => game.addVisual(entidad)})
+		entidades.forEach({entidad => entidad.activar()})
 	}
 	
 	method desactivar(){
-		entidades.forEach({entidad => game.removeVisual(entidad)})
+		entidades.forEach({entidad => entidad.desactivar()})
 	}
 	
 	method habitacionAdyacente(lado){ //Arriba, Derecha, Abajo, Izquierda
@@ -189,23 +205,72 @@ class Habitacion{
 }
 
 class TipoHabitacion {
+	method templates() = []
 	method background() = "backgrounds/infierno.png"
 }
 object HabitacionNormal inherits TipoHabitacion {
 	override method background() = "backgrounds/ladrillo.png"
+	override method templates() = [
+		new Template(entradas = [
+			[65535, new Position(x = 7, y = 7)]
+		]),
+		new Template(entradas = [
+			[65535, new Position(x = 5, y = 7)],
+			[65535, new Position(x = 9, y = 7)],
+			[65535, new Position(x = 7, y = 5)],
+			[65535, new Position(x = 7, y = 9)]
+		]),
+		new Template(entradas = [
+			[65535, new Position(x = 5, y = 5)],
+			[65535, new Position(x = 5, y = 9)],
+			[65535, new Position(x = 9, y = 5)],
+			[65535, new Position(x = 9, y = 9)]
+		])
+	]
 }
 object HabitacionPlayerSpawn inherits TipoHabitacion {}
 object HabitacionJefe inherits TipoHabitacion {
 	override method background() = "backgrounds/ladrillo.png"
+	override method templates() = [
+		new Template(entradas = [
+			[65535, new Position(x = 7, y = 11)]
+		])
+	]
 }
 object HabitacionPowerup inherits TipoHabitacion {}
 object HabitacionTienda inherits TipoHabitacion {}
 object HabitacionDesafio inherits TipoHabitacion {}
 
-class Puerta {
+//No se puede devolver un nombre de clase para instanciar ese nombre de clase
+//Entonces tengo que crear un sistema de ids de entidades para almacenar nombres de clase 
+//de alguna forma; esto para que funcione el sistema de plantillas
+object EntityIdSystem {
+	method newEntityById(id) {
+		if (id == 65535) {return new TestEntity()}
+		return null
+	}
+}
+
+class Template {
+	var property entradas = [] //Cada entrada es un ID de entidad y un objeto Position
+}
+
+//Esto deberia ir en un archivo de entidades
+class Entidad {
 	var property position = game.at(0,0)
+	method activar() {game.addVisual(self)}
+	method desactivar() {game.removeVisual(self)}
+}
+
+class Puerta inherits Entidad {
 	var property direction = 0
 	var property playerPos = null
 	
 	method image() = "sprites/door/door_0.png"
+}
+
+class TestEntity inherits Entidad {
+	var activado = false
+	
+	method image() = "sprites/test/testsprite_0.png"
 }
