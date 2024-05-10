@@ -1,0 +1,26 @@
+import world.*
+
+describe "Tests de generacion de mundo" {
+	method initialize() {
+		
+	}
+	
+	test "Si genera con ocho habitaciones termina con nueve, tiene que tener un playerstart y una habitacion de jefe" {
+		world.generateWorld(8)
+		assert.equals(9, world.habitaciones().size())
+		
+		var tienePlayerStart = false;
+		var tieneJefe = false
+		world.habitaciones().forEach({habitacion =>
+			if (habitacion.tipo() == HabitacionPlayerSpawn) {
+				tienePlayerStart = true;
+			}
+			if (habitacion.tipo() == HabitacionJefe) {
+				tieneJefe = true;
+			}
+		})
+		
+		assert.that(tienePlayerStart)
+		assert.that(tieneJefe)
+	}
+}
