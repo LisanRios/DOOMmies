@@ -1,11 +1,22 @@
+import wollok.game.*
+import world.*
+import graphics.*
+import player.*
+
+
 class Enemigo {
 	var property vivo = true
+	var property position = EntityIdSystem.newEntityById(65535)
 	
 	method defensa(danio){}	
 	
 	method estaVivo() = vivo
 	
-	method mover(dir){}
+	method position(player) = game.at(self.seguirX(player),self.seguirY(player))
+	
+	method seguirX(player) = player.position().x()
+	
+	method seguirY(player) = player.position().y()
 }
 
 class Minions inherits Enemigo{
@@ -22,6 +33,8 @@ class Minions inherits Enemigo{
 	method ataque(jugador){
 		jugador.danio(ataque)
 	}
+	
+	method image() = "../assets/sprites/test/testsprite_0.png"
 }
 
 class Soldado inherits Enemigo{
@@ -46,6 +59,24 @@ class Demonio inherits Enemigo{
 	var vida = 100 
 	const ataque = 75	
 	var armadura = 100
+
+	override method defensa(danio){
+		if(armadura >= 0){
+			armadura -= danio
+		} else {
+			vida -= danio
+		}
+	}
+	
+	method ataque(jugador){
+		jugador.danio(ataque)
+	}
+}
+
+class Jefe inherits Enemigo {
+	var vida = 250 
+	const ataque = 100	
+	var armadura = 250
 
 	override method defensa(danio){
 		if(armadura >= 0){

@@ -228,7 +228,9 @@ object HabitacionNormal inherits TipoHabitacion {
 		])
 	]
 }
-object HabitacionPlayerSpawn inherits TipoHabitacion {}
+object HabitacionPlayerSpawn inherits TipoHabitacion {
+	
+}
 object HabitacionJefe inherits TipoHabitacion {
 	override method background() = "backgrounds/ladrillo.png"
 	override method templates() = [

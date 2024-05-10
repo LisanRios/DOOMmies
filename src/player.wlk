@@ -1,12 +1,15 @@
 import wollok.game.*
 import world.*
+import graphics.*
+import enemigos.*
+import objects.*
 
 class Player {
 	var vida = 100
 	var vivo = true
 	var flag = 0
 	var property position = game.at(1, 2)
-	const property inventario = #{}
+	const property inventario = #{fusil,espada,escopeta}
 	const property equipado = #{}
 	
 	method image() = "sprites/player/player_0.png"
@@ -22,12 +25,14 @@ class Player {
 	}
 	
 	method ataque(arma) {
-		if(inventario.contains(arma)){
-			arma.usar()
-			arma.municion()
-			return arma.danio()
-		}
-		return false
+    	if (inventario.contains(arma)) {
+        	arma.usar()
+        	arma.municion()
+         // Crear una bala y mostrarla en la posición actual del jugador
+        	game.addVisualCharacterIn(arma , position)
+        	return arma.danio()
+    	}
+    	return false
 	}
 	
 	method recargar(arma) = arma.recargar()
@@ -91,142 +96,9 @@ class Player {
 		keyboard.left().onPressDo({self.move(3)})
 		keyboard.a().onPressDo({self.equip(1)})
 		keyboard.s().onPressDo({self.equip(2)})		
-	//	keyboard.z().onPressDo({self.shoot()})
-	//	keyboard.x().onPressDo({self.reload()})
-	//	keyboard.space().onPressDo({self.heal()})
+		keyboard.z().onPressDo({ self.ataque(escopeta) }) // Ataque con Escopeta
+    	keyboard.x().onPressDo({ self.ataque(espada) })   // Ataque con Espada
+    	keyboard.space().onPressDo({ self.ataque(fusil) }) // Ataque con Fusil)
 	}
 
-}
-
-class Armas {
-	var municion = 0
-	method municion() = null
-	
-	method danio() = null
-	
-	method agregarMunicion(cant) {
-		municion += cant
-	}
-	
-	method usar() {
-		municion -= 1
-	}
-}
-
-class Escopeta inherits Armas {
-	const property municionBase = 5
-	var municionDisponible = 0
-	var municionUtilizable = 5
-	const danio = 20
-	
-	override method municion() = municionDisponible
-	
-	override method danio() = danio
-	
-	override method agregarMunicion(cant) {
-		municionDisponible += cant
-	}
-	
-	override method usar() {
-		municionUtilizable -= 1
-	}
-	
-	method recargar() {
-		municionDisponible -= (municionBase - municionUtilizable)
-		municionUtilizable += (municionBase - municionUtilizable)
-		return municionUtilizable	
-	}
-}
-
-class Espada inherits Armas {
-	const property municionBase = 0
-	var danio = 5
-	
-	override method municion() = null
-	
-	override method danio() = danio
-	
-	override method agregarMunicion(cant) {
-		danio += cant
-	}
-	
-	override method usar() {
-		danio += municionBase
-	}
-	
-	method recargar() {
-		return null
-	}
-}
-
-class Fusil inherits Armas {
-	const property municionBase = 14
-	var municionDisponible = 0
-	var municionUtilizable = 14
-	const danio = 10
-	
-	override method municion() = municionDisponible
-	
-	override method danio() = danio
-	
-	override method agregarMunicion(cant) {
-		municionDisponible += cant
-	}
-	
-	override method usar() {
-		municionUtilizable -= 1
-	}
-	
-	method recargar() {
-		municionDisponible -= (municionBase - municionUtilizable)
-		municionUtilizable += (municionBase - municionUtilizable)
-		return municionUtilizable
-	}
-}
-
-class Automatica inherits Armas {
-	const property municionBase = 30
-	var municionDisponible = 0
-	var municionUtilizable = 30
-	const danio = 15
-
-	override method municion() = municionDisponible
-	
-	override method danio() = danio
-	
-	override method agregarMunicion(cant) {
-		municionDisponible += cant
-	}
-	
-	override method usar() {
-		municionUtilizable -= 1
-	}
-	
-	method recargar() {
-		municionDisponible -= (municionBase - municionUtilizable)
-		municionUtilizable += (municionBase - municionUtilizable)
-		return municionUtilizable
-	}
-}
-
-class Curacion {	
-	method efecto() = null
-}
-
-class BotiquinP inherits Curacion {
-	const salud = 25
-	
-	override method efecto() = salud
-}
-
-class BotiquinM inherits Curacion {
-	const salud = 50
-	
-	override method efecto() = salud
-}
-
-class BotiquinG inherits Curacion {
-	const salud = 75
-	
-	override method efecto() = salud
 }

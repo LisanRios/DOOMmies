@@ -6,6 +6,8 @@ import wollok.game.*
 import world.*
 import graphics.*
 import player.*
+import enemigos.*
+import objects.*
 
 program main {
 	game.width(15)
@@ -14,6 +16,9 @@ program main {
 	world.generateWorld(8)
 	
 	var player = new Player()
+	var escopeta = new Escopeta(municion = 100000)
+	var espada = new Espada(municion = 100000)
+	var fusil = new Fusil(municion = 100000)
 	game.addVisual(player)
 	game.start()
 }
