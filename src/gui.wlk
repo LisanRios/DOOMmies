@@ -20,7 +20,16 @@ object caraGui {
 	var property position = game.at(0,0)
 	var img = "ui/cara_mid.png"
 	
+	method initialize() {
+		game.schedule(250.randomUpTo(1000), {=> self.randFace()})
+	}
+	
 	method image() = img
+	
+	method randFace() {
+		img = ["ui/cara_der.png", "ui/cara_mid.png", "ui/cara_izq.png"].get(0.randomUpTo(2))
+		game.schedule(250.randomUpTo(1000), {=> self.randFace()})
+	}
 }
 
 class guiLabel {
