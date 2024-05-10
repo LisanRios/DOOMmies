@@ -34,7 +34,7 @@ class Minions inherits Enemigo{
 		jugador.danio(ataque)
 	}
 	
-	method image() = "../assets/sprites/test/testsprite_0.png"
+	method image() = "../assets/sprites/monsters/minion.png"
 }
 
 class Soldado inherits Enemigo{
@@ -53,6 +53,8 @@ class Soldado inherits Enemigo{
 	method ataque(jugador){
 		jugador.danio(ataque)
 	}
+	
+	method image()= "../assets/sprites/monsters/soldado.png"
 }
 
 class Demonio inherits Enemigo{
@@ -71,6 +73,8 @@ class Demonio inherits Enemigo{
 	method ataque(jugador){
 		jugador.danio(ataque)
 	}
+	
+	method image()= "../assets/sprites/monsters/demonio.png"
 }
 
 class Jefe inherits Enemigo {
@@ -89,5 +93,7 @@ class Jefe inherits Enemigo {
 	method ataque(jugador){
 		jugador.danio(ataque)
 	}
+	
+	method image()= "../assets/sprites/monsters/jefe.png"
 }
 
