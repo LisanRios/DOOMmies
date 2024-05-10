@@ -1,5 +1,5 @@
 class Armas {
-	var municion
+	var municion = 0
 	const property imagenBalas = "..\assets\sprites\weapons\balas.png"
 	
 	method municion() = null

@@ -6,23 +6,26 @@ import player.*
 
 class Enemigo {
 	var property vivo = true
-	var property position = EntityIdSystem.newEntityById(65535)
+	var property position = game.at(0,0)
 	
 	method defensa(danio){}	
 	
 	method estaVivo() = vivo
 	
-	method position(player) = game.at(self.seguirX(player),self.seguirY(player))
+	//method position(player) = game.at(self.seguirX(player),self.seguirY(player))
 	
 	method seguirX(player) = player.position().x()
 	
 	method seguirY(player) = player.position().y()
+	
+	method activar() {game.addVisual(self)}
+	method desactivar() {game.removeVisual(self)}
 }
 
 class Minions inherits Enemigo{
 	var vida = 5 
 	const ataque = 5	
-
+	
 	override method defensa(danio){
 		vida -= danio
 		if(vida <= 0){
@@ -34,13 +37,14 @@ class Minions inherits Enemigo{
 		jugador.danio(ataque)
 	}
 	
-	method image() = "../assets/sprites/monsters/minion.png"
+	method image() = "sprites/monsters/minion.png"
 }
 
 class Soldado inherits Enemigo{
 	var vida = 50 
 	const ataque = 25	
 	var armadura = 50
+	
 
 	override method defensa(danio){
 		if(armadura >= 0){
@@ -54,7 +58,7 @@ class Soldado inherits Enemigo{
 		jugador.danio(ataque)
 	}
 	
-	method image()= "../assets/sprites/monsters/soldado.png"
+	method image()= "sprites/monsters/soldado.png"
 }
 
 class Demonio inherits Enemigo{
@@ -74,7 +78,7 @@ class Demonio inherits Enemigo{
 		jugador.danio(ataque)
 	}
 	
-	method image()= "../assets/sprites/monsters/demonio.png"
+	method image()= "sprites/monsters/demonio.png"
 }
 
 class Jefe inherits Enemigo {
@@ -94,6 +98,6 @@ class Jefe inherits Enemigo {
 		jugador.danio(ataque)
 	}
 	
-	method image()= "../assets/sprites/monsters/jefe.png"
+	method image()= "sprites/monsters/jefe.png"
 }
 

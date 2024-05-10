@@ -8,6 +8,7 @@ import graphics.*
 import player.*
 import enemigos.*
 import objects.*
+import gui.*
 
 program main {
 	game.width(15)
@@ -20,5 +21,9 @@ program main {
 	var espada = new Espada(municion = 100000)
 	var fusil = new Fusil(municion = 100000)
 	game.addVisual(player)
+	
+	gui.player(player)
+	gui.init()
+	
 	game.start()
 }

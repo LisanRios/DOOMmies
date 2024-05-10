@@ -1,4 +1,5 @@
 import wollok.game.*
+import enemigos.*
 
 //Objeto que maneja y genera el mundo
 object world {
@@ -212,30 +213,28 @@ object HabitacionNormal inherits TipoHabitacion {
 	override method background() = "backgrounds/ladrillo.png"
 	override method templates() = [
 		new Template(entradas = [
-			[65535, new Position(x = 7, y = 7)]
+			[2, new Position(x = 7, y = 7)]
 		]),
 		new Template(entradas = [
-			[65535, new Position(x = 5, y = 7)],
-			[65535, new Position(x = 9, y = 7)],
-			[65535, new Position(x = 7, y = 5)],
-			[65535, new Position(x = 7, y = 9)]
+			[0, new Position(x = 5, y = 7)],
+			[0, new Position(x = 9, y = 7)],
+			[0, new Position(x = 7, y = 5)],
+			[0, new Position(x = 7, y = 9)]
 		]),
 		new Template(entradas = [
-			[65535, new Position(x = 5, y = 5)],
-			[65535, new Position(x = 5, y = 9)],
-			[65535, new Position(x = 9, y = 5)],
-			[65535, new Position(x = 9, y = 9)]
+			[1, new Position(x = 5, y = 5)],
+			[1, new Position(x = 5, y = 9)],
+			[1, new Position(x = 9, y = 5)],
+			[1, new Position(x = 9, y = 9)]
 		])
 	]
 }
-object HabitacionPlayerSpawn inherits TipoHabitacion {
-	
-}
+object HabitacionPlayerSpawn inherits TipoHabitacion {}
 object HabitacionJefe inherits TipoHabitacion {
 	override method background() = "backgrounds/ladrillo.png"
 	override method templates() = [
 		new Template(entradas = [
-			[65535, new Position(x = 7, y = 11)]
+			[3, new Position(x = 7, y = 11)]
 		])
 	]
 }
@@ -248,7 +247,11 @@ object HabitacionDesafio inherits TipoHabitacion {}
 //de alguna forma; esto para que funcione el sistema de plantillas
 object EntityIdSystem {
 	method newEntityById(id) {
-		if (id == 65535) {return new TestEntity()}
+		if (id == 0) { return new Minions()}
+		if (id == 1) { return new Soldado()}
+		if (id == 2) { return new Demonio()}
+		if (id == 3) { return new Jefe()}
+		if (id == 65535) { return new TestEntity() }
 		return null
 	}
 }

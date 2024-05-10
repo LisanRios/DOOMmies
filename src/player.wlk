@@ -5,11 +5,11 @@ import enemigos.*
 import objects.*
 
 class Player {
-	var vida = 100
+	var property vida = 100
 	var vivo = true
 	var flag = 0
 	var property position = game.at(1, 2)
-	const property inventario = #{fusil,espada,escopeta}
+	const property inventario = #{new Fusil(),new Espada(),new Escopeta()}
 	const property equipado = #{}
 	
 	method image() = "sprites/player/player_0.png"
