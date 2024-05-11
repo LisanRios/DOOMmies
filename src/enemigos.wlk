@@ -20,6 +20,7 @@ class Enemigo {
 	
 	method activar() {game.addVisual(self)}
 	method desactivar() {game.removeVisual(self)}
+	method collide(p) {game.say(self, "ATAQUE")}
 }
 
 class Minions inherits Enemigo{

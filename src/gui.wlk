@@ -12,7 +12,7 @@ object gui {
 	}
 	
 	method update() {
-		healthLabel.update(player.vida())
+		healthLabel.update("SALUD: " + player.vida().toString() + "\nARMADURA: 100")
 	}
 }
 
@@ -30,16 +30,20 @@ object caraGui {
 		img = ["ui/cara_der.png", "ui/cara_mid.png", "ui/cara_izq.png"].get(0.randomUpTo(2))
 		game.schedule(250.randomUpTo(1000), {=> self.randFace()})
 	}
+	
+	method collide(p) {}
 }
 
 class guiLabel {
-	var property position = game.at(1,0)
+	var property position = game.at(2,0)
 	var txt = "TEST"
 	
 	method text() = txt
 	method update(t) {
-		txt = t.toString()
+		txt = t
 	}
+	
+	method collide(p) {}
 }
 
 class guiLabelNumberDigit {

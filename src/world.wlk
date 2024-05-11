@@ -1,5 +1,6 @@
 import wollok.game.*
 import enemigos.*
+import objects.*
 
 //Objeto que maneja y genera el mundo
 object world {
@@ -8,7 +9,10 @@ object world {
 	var espacios_ocupados = []
 	
 	var property habitacion_actual = null
-	var tipos_habitacion = []
+	var tipos_habitacion = [
+			HabitacionPowerup,
+			HabitacionPowerup
+		]
 	
 	
 	method cambiarHabitacion(h) {
@@ -25,10 +29,6 @@ object world {
 	}
 	
 	method generateWorld(maxHabitaciones) {
-		tipos_habitacion = [
-			//HabitacionJefe, //Va a spawnear obligatoriamente en una habitacion en la punta
-			HabitacionPowerup
-		]
 		habitaciones.clear()
 		espacios_ocupados.clear()
 		espacios_disponibles.clear()
@@ -238,7 +238,19 @@ object HabitacionJefe inherits TipoHabitacion {
 		])
 	]
 }
-object HabitacionPowerup inherits TipoHabitacion {}
+object HabitacionPowerup inherits TipoHabitacion {
+	override method templates() = [
+		new Template(entradas = [
+			[1001, new Position(x = 7, y = 11)]
+		]),
+		new Template(entradas = [
+			[1002, new Position(x = 7, y = 11)]
+		]),
+		new Template(entradas = [
+			[1003, new Position(x = 7, y = 11)]
+		])
+	]
+}
 object HabitacionTienda inherits TipoHabitacion {}
 object HabitacionDesafio inherits TipoHabitacion {}
 
@@ -251,6 +263,9 @@ object EntityIdSystem {
 		if (id == 1) { return new Soldado()}
 		if (id == 2) { return new Demonio()}
 		if (id == 3) { return new Jefe()}
+		if (id == 1001) {return new ItemEspada()}
+		if (id == 1002) {return new ItemFusil()}
+		if (id == 1003) {return new ItemEscopeta()}
 		if (id == 65535) { return new TestEntity() }
 		return null
 	}
@@ -272,6 +287,10 @@ class Puerta inherits Entidad {
 	var property playerPos = null
 	
 	method image() = "sprites/door/door_0.png"
+	method collide(p) {
+		p.position(playerPos)
+		world.cambiarHabitacionAdyacente(direction)
+	}
 }
 
 class TestEntity inherits Entidad {

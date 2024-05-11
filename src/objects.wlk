@@ -1,5 +1,7 @@
+import wollok.game.*
+
 class Armas {
-	const property imagenBalas = "..\assets\sprites\weapons\balas.png"
+	const property imagenBalas = "sprites/weapons/balas.png"
 	
 	method municion() = null
 	
@@ -46,6 +48,7 @@ class Escopeta inherits Armas {
 
 class Espada inherits Armas {
 	const property municionBase = 0
+	var municionUtilizable = 5
 	var danio = 5
 	
 	override method municion() = null
@@ -94,6 +97,38 @@ class Fusil inherits Armas {
 			municionUtilizable += (municionBase - municionUtilizable)
 			return municionUtilizable	
 		}
+	}
+}
+
+//Items de armas. Estas son los pickups de armas ubicables en el mapa
+class Item {
+	var property position = game.at(0,0)
+	var tomado = false;
+	
+	method activar() {
+		if (not tomado)
+			game.addVisual(self)
+	}
+	method desactivar() {
+		if (game.hasVisual(self)) 
+			game.removeVisual(self)
+	}
+	method collide(p) {
+		tomado = true;
+		game.removeVisual(self)
+	}
+}
+
+class ItemEspada inherits Item{
+	method image() = "sprites/weapons/sword_normal.png"
+}
+
+class ItemFusil inherits Item{
+	method image() = "sprites/weapons/fusil.png"
+}
+
+class ItemEscopeta inherits Item{
+	method image() = "sprites/weapons/ShootGun_0.png"
 }
 
 class Curacion {	

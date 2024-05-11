@@ -74,15 +74,7 @@ class Player {
 		if (dir == 3) position = position.left(1)
 		
 		var col = game.colliders(self)
-		col.forEach({col =>
-			if (col.toString() == "un/a  Puerta") {
-				var d = col.direction()
-				position = col.playerPos()
-				world.cambiarHabitacionAdyacente(d)
-			}
-			
-			console.println(col.toString())
-		})
+		col.forEach({col => col.collide(self)})
 	}
 	
 	method initialize() {

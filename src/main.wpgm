@@ -1,3 +1,5 @@
+// NOOOOOOOOOOOOOOOOOOO PORQUE SACARON EL COMENTARIO :((((((((((((((((((((
+
 import wollok.game.*
 import world.*
 import graphics.*
@@ -10,16 +12,18 @@ program main {
 	game.width(15)
 	game.height(15)
 	
-	world.generateWorld(8)
+	world.generateWorld(10)
 	
 	var player = new Player()
+	game.addVisual(player)
+	
 	var escopeta = new Escopeta(municionUtilizable = 100000)
 	var espada = new Espada(municionUtilizable = 100000)
 	var fusil = new Fusil(municionUtilizable = 100000)
 	var botiquinp = new BotiquinP()
 	var botiquinm = new BotiquinM()
 	var botiquing = new BotiquinG()
-	game.addVisual(player)
+	
 	
 	gui.player(player)
 	gui.init()
