@@ -1,19 +1,15 @@
 class Armas {
-	var municion = 0
 	const property imagenBalas = "..\assets\sprites\weapons\balas.png"
 	
 	method municion() = null
 	
 	method danio() = null
 	
-	method agregarMunicion(cant) {
-		municion += cant
-	}
+	method agregarMunicion(cant) {}
 	
-	method usar() {
-		municion -= 1
-	}
+	method usar() {}
 	
+	method recargar() = null
 }
 
 class Escopeta inherits Armas {
@@ -34,10 +30,17 @@ class Escopeta inherits Armas {
 		municionUtilizable -= 1
 	}
 	
-	method recargar() {
-		municionDisponible -= (municionBase - municionUtilizable)
-		municionUtilizable += (municionBase - municionUtilizable)
-		return municionUtilizable	
+	override method recargar() {
+		if (municionDisponible - municionUtilizable < 0) {
+			municionUtilizable += municionDisponible
+			municionDisponible = 0
+			return municionUtilizable
+		}
+		else {
+			municionDisponible -= (municionBase - municionUtilizable)
+			municionUtilizable += (municionBase - municionUtilizable)
+			return municionUtilizable	
+		}
 	}
 }
 
@@ -57,7 +60,7 @@ class Espada inherits Armas {
 		danio += municionBase
 	}
 	
-	method recargar() {
+	override method recargar() {
 		return null
 	}
 }
@@ -80,36 +83,17 @@ class Fusil inherits Armas {
 		municionUtilizable -= 1
 	}
 	
-	method recargar() {
-		municionDisponible -= (municionBase - municionUtilizable)
-		municionUtilizable += (municionBase - municionUtilizable)
-		return municionUtilizable
-	}
-}
-
-class Automatica inherits Armas {
-	const property municionBase = 30
-	var municionDisponible = 0
-	var municionUtilizable = 30
-	const danio = 15
-
-	override method municion() = municionDisponible
-	
-	override method danio() = danio
-	
-	override method agregarMunicion(cant) {
-		municionDisponible += cant
-	}
-	
-	override method usar() {
-		municionUtilizable -= 1
-	}
-	
-	method recargar() {
-		municionDisponible -= (municionBase - municionUtilizable)
-		municionUtilizable += (municionBase - municionUtilizable)
-		return municionUtilizable
-	}
+	override method recargar() {
+		if (municionDisponible - municionUtilizable < 0) {
+			municionUtilizable += municionDisponible
+			municionDisponible = 0
+			return municionUtilizable
+		}
+		else {
+			municionDisponible -= (municionBase - municionUtilizable)
+			municionUtilizable += (municionBase - municionUtilizable)
+			return municionUtilizable	
+		}
 }
 
 class Curacion {	
@@ -133,3 +117,4 @@ class BotiquinG inherits Curacion {
 	
 	override method efecto() = salud
 
+}

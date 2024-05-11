@@ -1,7 +1,3 @@
-//Wollok es el decimo circulo del infierno
-//Los que cometan el Pecado Mortal de anotarse en TPI Unsam seran castigados a
-//programar en el lenguaje mas horrible por toda la eternidad. Fun with Objects!
-
 import wollok.game.*
 import world.*
 import graphics.*
@@ -17,9 +13,12 @@ program main {
 	world.generateWorld(8)
 	
 	var player = new Player()
-	var escopeta = new Escopeta(municion = 100000)
-	var espada = new Espada(municion = 100000)
-	var fusil = new Fusil(municion = 100000)
+	var escopeta = new Escopeta(municionUtilizable = 100000)
+	var espada = new Espada(municionUtilizable = 100000)
+	var fusil = new Fusil(municionUtilizable = 100000)
+	var botiquinp = new BotiquinP()
+	var botiquinm = new BotiquinM()
+	var botiquing = new BotiquinG()
 	game.addVisual(player)
 	
 	gui.player(player)

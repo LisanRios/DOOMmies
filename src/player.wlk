@@ -5,14 +5,16 @@ import enemigos.*
 import objects.*
 
 class Player {
-	var property vida = 100
+	var property vida = 150
 	var vivo = true
 	var flag = 0
 	var property position = game.at(1, 2)
-	const property inventario = #{new Fusil(),new Espada(),new Escopeta()}
-	const property equipado = #{}
+	const property inventario = #{new Fusil(), new Espada(), new Escopeta(), new BotiquinP(), new BotiquinM(), new BotiquinG()}
 	
 	method image() = "sprites/player/player_0.png"
+	method image2() = "sprites/player/player_2.png"
+	method image3() = "sprites/player/player_5.png"
+	method image4() = "sprites/player/player_6.png"
 
 	method encontrarArma(arma) {
 		if (inventario.contains(arma)) arma.agregarMunicion(arma.municionBase())
@@ -29,10 +31,10 @@ class Player {
         	arma.usar()
         	arma.municion()
          // Crear una bala y mostrarla en la posición actual del jugador
-        	game.addVisualCharacterIn(arma , position)
+        	game.addVisualCharacterIn(arma, position)
         	return arma.danio()
     	}
-    	return false
+    	return 0
 	}
 	
 	method recargar(arma) = arma.recargar()
@@ -48,14 +50,14 @@ class Player {
 	
 	method curacion(curacion) {
 		if(inventario.contains(curacion)) {
-			if (vida + curacion.efecto() > 100) vida += (100 - vida)
+			if (vida + curacion.efecto() > 150) vida += (150 - vida)
 			else vida += curacion.efecto()
-			flag -=1
+			flag -= 1
 			if (flag < 0) flag = 0
 			if (flag == 0) inventario.remove(curacion)
 			return vida
 		}
-		return false
+		return vida
 	}
 	
 	method estaVivo() = vivo
@@ -83,22 +85,17 @@ class Player {
 		})
 	}
 	
-	method equip(dir) { //aca no supe como hacer que rquipe o desequipe un objeto xd 
-						//(mas que nada pensaba hacer que cambie de arma con un boton tipo gta sa)
-		if (dir == 1) equipado.add()
-		if (dir == 2) equipado.add()
-	}
-	
 	method initialize() {
 		keyboard.up().onPressDo({self.move(0)})
 		keyboard.right().onPressDo({self.move(1)})
 		keyboard.down().onPressDo({self.move(2)})
-		keyboard.left().onPressDo({self.move(3)})
-		keyboard.a().onPressDo({self.equip(1)})
-		keyboard.s().onPressDo({self.equip(2)})		
-		keyboard.z().onPressDo({ self.ataque(escopeta) }) // Ataque con Escopeta
-    	keyboard.x().onPressDo({ self.ataque(espada) })   // Ataque con Espada
-    	keyboard.space().onPressDo({ self.ataque(fusil) }) // Ataque con Fusil)
+		keyboard.left().onPressDo({self.move(3)})	
+		keyboard.z().onPressDo({self.ataque(escopeta)}) // Ataque con Escopeta
+    	keyboard.x().onPressDo({self.ataque(espada)})   // Ataque con Espada
+    	keyboard.space().onPressDo({self.ataque(fusil)}) // Ataque con Fusil
+    	keyboard.q().onPressDo({self.curacion(botiquinp)}) // Usar botiquin pequeño
+	    keyboard.w().onPressDo({self.curacion(botiquinm)}) // Usar botiquin mediano
+	    keyboard.e().onPressDo({self.curacion(botiquing)}) // Usar botiquin grande
 	}
 
 }
