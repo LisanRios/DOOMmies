@@ -55,7 +55,7 @@ class Enemigo {
 	}
 	method collide(p) {
 		game.say(self, "AAAAAA")
-		//self.ataque(p)
+		self.ataque(p)
 	}
 }
 
