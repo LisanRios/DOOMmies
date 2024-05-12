@@ -35,7 +35,6 @@ class Player {
 		inventario.add(curacion)
 	}
 	
-*/	
 	method ataque() {
         	armaEquipada.usar(position)
         	//armaEquipada.municion()
@@ -45,7 +44,6 @@ class Player {
     	
     	
 	}
-	
 	
 	method dropArmaEquipada() {
 		armaEquipada.position(lastPosition)

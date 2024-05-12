@@ -140,7 +140,6 @@ class Fusil inherits Armas {
 	method image() = "sprites/weapons/fusil.png"
 }
 
-//Items de armas. Estas son los pickups de armas ubicables en el mapa
 class Bala {
 	const property image = "sprites/weapons/balas.png"
 	
@@ -153,8 +152,6 @@ class Bala {
 		} 
 	}
 }
-
-
 
 class Curacion {	
 	method efecto() = null
