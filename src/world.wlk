@@ -11,9 +11,13 @@ object world {
 	var property habitacion_actual = null
 	var tipos_habitacion = [
 			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
 			HabitacionPowerup
 		]
-	
 	
 	method cambiarHabitacion(h) {
 		habitacion_actual.desactivar()
@@ -134,6 +138,14 @@ object world {
 			habitacion.adyacentes(habitacionesAdyacentes)
 		})
 	}
+	
+	method addObjetoHabitacionActual(obj) {
+		habitacion_actual.addEntidad(obj)
+	}
+	
+	method removeObjetoHabitacionActual(obj) {
+		habitacion_actual.removeEntidad(obj)
+	}
 }
 
 class Habitacion{
@@ -141,7 +153,7 @@ class Habitacion{
 	var property adyacentes = [null, null, null, null] //Arriba, Derecha, Abajo, Izquierda
 	var tipo = HabitacionNormal
 	
-	var entidades = []
+	var property entidades = []
 	
 	var posicionesPuertas = [
 		new Position(x = 7, y = 14),
@@ -203,6 +215,14 @@ class Habitacion{
 	method habitacionAdyacente(lado){ //Arriba, Derecha, Abajo, Izquierda
 		return adyacentes.get(lado)
 	}
+	
+	method addEntidad(obj) {
+		entidades.add(obj)
+	}
+	
+	method removeEntidad(obj) {
+		entidades.remove(obj)
+	}
 }
 
 class TipoHabitacion {
@@ -263,9 +283,9 @@ object EntityIdSystem {
 		if (id == 1) { return new Soldado()}
 		if (id == 2) { return new Demonio()}
 		if (id == 3) { return new Jefe()}
-		if (id == 1001) {return new ItemEspada()}
-		if (id == 1002) {return new ItemFusil()}
-		if (id == 1003) {return new ItemEscopeta()}
+		if (id == 1001) {return new Espada()}
+		if (id == 1002) {return new Fusil()}
+		if (id == 1003) {return new Escopeta()}
 		if (id == 65535) { return new TestEntity() }
 		return null
 	}
