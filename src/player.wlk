@@ -35,16 +35,14 @@ class Player {
 		inventario.add(curacion)
 	}
 	
-	*/
-	method ataque(arma) {
-    	if (inventario.contains(arma)) {
-        	arma.usar()
-        	arma.municion()
+	method ataque() {
+        	armaEquipada.usar(position)
+        	//armaEquipada.municion()
          // Crear una bala y mostrarla en la posición actual del jugador
-        	game.addVisualCharacterIn(arma, position)
-        	return arma.danio()
-    	}
-    	return 0
+        	//game.addVisualCharacterIn(arma, position)
+        	//return arma.danio()
+    	
+    	
 	}
 	
 	method dropArmaEquipada() {
@@ -105,9 +103,9 @@ class Player {
 		keyboard.right().onPressDo({self.move(1)})
 		keyboard.down().onPressDo({self.move(2)})
 		keyboard.left().onPressDo({self.move(3)})	
-		keyboard.z().onPressDo({self.ataque(escopeta)}) // Ataque con Escopeta
-    	keyboard.x().onPressDo({self.ataque(espada)})   // Ataque con Espada
-    	keyboard.space().onPressDo({self.ataque(fusil)}) // Ataque con Fusil
+		//keyboard.z().onPressDo({self.ataque(escopeta)}) // Ataque con Escopeta
+    	//keyboard.x().onPressDo({self.ataque(espada)})   // Ataque con Espada
+    	keyboard.space().onPressDo({self.ataque()}) // Ataque con Fusil
     	keyboard.q().onPressDo({self.curacion(botiquinp)}) // Usar botiquin pequeño
 	    keyboard.w().onPressDo({self.curacion(botiquinm)}) // Usar botiquin mediano
 	    keyboard.e().onPressDo({self.curacion(botiquing)}) // Usar botiquin grande

@@ -2,7 +2,7 @@ import wollok.game.*
 import world.*
 
 class Armas {
-	const property imagenBalas = "sprites/weapons/balas.png"
+	
 	
 	var property position = game.at(0,0)
 	var property tomado = false;
@@ -13,9 +13,11 @@ class Armas {
 	
 	method agregarMunicion(cant) {}
 	
-	method usar() {}
+	method usar(posicion) {}
 	
 	method recargar() = null
+	
+	
 	
 	method activar() {
 		if (not game.hasVisual(self))
@@ -48,8 +50,14 @@ class Escopeta inherits Armas {
 		municionDisponible += cant
 	}
 	
-	override method usar() {
-		municionUtilizable -= 1
+
+	
+	override method usar(posicion) {
+		var municion = new Bala()
+		municion.position(posicion)
+		game.addVisual(municion) 
+		game.onTick(3, "tiroEscopeta", { => municion.moverBala(posicion) })
+		//municionUtilizable -= 1
 	}
 	
 	override method recargar() {
@@ -81,7 +89,8 @@ class Espada inherits Armas {
 		danio += cant
 	}
 	
-	override method usar() {
+	override method usar(posicion) {
+	
 		danio += municionBase
 	}
 	
@@ -106,8 +115,13 @@ class Fusil inherits Armas {
 		municionDisponible += cant
 	}
 	
-	override method usar() {
-		municionUtilizable -= 1
+	
+	override method usar(posicion) {
+		var municion = new Bala()
+		municion.position(posicion)
+		game.addVisual(municion) 
+		game.onTick(3, "tiroEscopeta", { => municion.moverBala(posicion) })
+		//municionUtilizable -= 1
 	}
 	
 	override method recargar() {
@@ -124,6 +138,19 @@ class Fusil inherits Armas {
 	}
 	
 	method image() = "sprites/weapons/fusil.png"
+}
+
+class Bala {
+	const property image = "sprites/weapons/balas.png"
+	
+	var property position = game.at(0,0)
+	
+	method moverBala(posicion) {
+		position = position.right(1)
+		if (position.x() == 5 ){
+			game.removeVisual(self)
+		} 
+	}
 }
 
 class Curacion {	
