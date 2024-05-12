@@ -7,7 +7,6 @@ import objects.*
 class Player {
 	var property vida = 150
 	var vivo = true
-	var flag = 0
 	var lastPosition = game.at(1,2)
 	var property position = game.at(1, 2)
 	var property armaEquipada = new Espada(tomado = true)
@@ -29,12 +28,11 @@ class Player {
 		if (inventario.contains(arma)) arma.agregarMunicion(arma.municionBase())
 		inventario.add(arma)
 	}
-	
+	*/
 	method encontrarCuracion(curacion) {
-		flag += 1
-		inventario.add(curacion)
-	}
-	
+			self.curacion(curacion)
+		}
+
 	method ataque() {
         	armaEquipada.usar(position)
         	//armaEquipada.municion()
@@ -67,15 +65,8 @@ class Player {
 	}
 	
 	method curacion(curacion) {
-		if(inventario.contains(curacion)) {
-			if (vida + curacion.efecto() > 150) vida += (150 - vida)
-			else vida += curacion.efecto()
-			flag -= 1
-			if (flag < 0) flag = 0
-			if (flag == 0) inventario.remove(curacion)
-			return vida
-		}
-		return vida
+		if (vida + curacion.efecto() > 150) vida += (150 - vida)
+		else vida += curacion.efecto()
 	}
 	
 	method estaVivo() = vivo
@@ -106,9 +97,6 @@ class Player {
 		//keyboard.z().onPressDo({self.ataque(escopeta)}) // Ataque con Escopeta
     	//keyboard.x().onPressDo({self.ataque(espada)})   // Ataque con Espada
     	keyboard.space().onPressDo({self.ataque()}) // Ataque con Fusil
-    	keyboard.q().onPressDo({self.curacion(botiquinp)}) // Usar botiquin pequeño
-	    keyboard.w().onPressDo({self.curacion(botiquinm)}) // Usar botiquin mediano
-	    keyboard.e().onPressDo({self.curacion(botiquing)}) // Usar botiquin grande
 	}
 
 }
