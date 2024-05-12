@@ -16,6 +16,7 @@ program main {
 	
 	var player = new Player()
 	game.addVisual(player)
+	world.player(player)
 	
 	var escopeta = new Escopeta(municionUtilizable = 100000)
 	var espada = new Espada(municionUtilizable = 100000)

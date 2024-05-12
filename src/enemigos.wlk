@@ -7,22 +7,55 @@ import player.*
 class Enemigo {
 	var property vivo = true
 	var property position = game.at(0,0)
+	var posicionOriginal = null
+	
+	method initialize(){
+		posicionOriginal = position
+	}
 	
 	method defensa(danio){}	
 	
 	method estaVivo() = vivo
 	
-	//method position(player) = game.at(self.seguirX(player),self.seguirY(player))
+	method perseguirJugador() {
+		var player = world.player()
+		var positioncand = null
+		
+		if (player.position().x() < position.x() and not self.mismoTipoEnPosicion(position.left(1)) ) {
+			position = position.left(1)
+		}
+		if (player.position().x() > position.x() and not self.mismoTipoEnPosicion(position.right(1)) ) {
+			position = position.right(1)
+		}
+		if (player.position().y() < position.y() and not self.mismoTipoEnPosicion(position.down(1)) ) {
+			position = position.down(1)
+		}
+		if (player.position().y() > position.y() and not self.mismoTipoEnPosicion(position.up(1)) ) {
+			position = position.up(1)
+		}
+	}
 	
-	method seguirX(player) = player.position().x()
+	method mismoTipoEnPosicion(pos) {
+		var o = game.getObjectsIn(pos)
+		o = o.filter({obj => 
+			return obj.toString() == self.toString()
+		})
+		return not o.isEmpty()
+	}
 	
-	method seguirY(player) = player.position().y()
-	
-	method activar() {game.addVisual(self)}
-	method desactivar() {game.removeVisual(self)}
+	method activar() {
+		if (posicionOriginal == null) posicionOriginal = position
+		position = posicionOriginal
+		game.onTick(500, self.identity().toString()+"_perseguir", {self.perseguirJugador()})
+		game.addVisual(self)
+	}
+	method desactivar() {
+		game.removeTickEvent(self.identity().toString()+"_perseguir")
+		game.removeVisual(self)
+	}
 	method collide(p) {
 		game.say(self, "AAAAAA")
-		self.ataque(p)
+		//self.ataque(p)
 	}
 }
 

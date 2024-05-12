@@ -4,16 +4,14 @@ import objects.*
 
 //Objeto que maneja y genera el mundo
 object world {
+	var property player = null
+	
 	var property habitaciones = []
 	var espacios_disponibles = [ [0,0] ]
 	var espacios_ocupados = []
 	
 	var property habitacion_actual = null
 	var tipos_habitacion = [
-			HabitacionPowerup,
-			HabitacionPowerup,
-			HabitacionPowerup,
-			HabitacionPowerup,
 			HabitacionPowerup,
 			HabitacionPowerup,
 			HabitacionPowerup
