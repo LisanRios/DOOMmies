@@ -24,8 +24,8 @@ program main {
 	var botiquinm = new BotiquinM()
 	var botiquing = new BotiquinG()
 	
-	
-	gui.player(player)
+	 
+	gui.player (player)
 	gui.init()
 	
 	game.start()
