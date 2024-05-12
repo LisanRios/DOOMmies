@@ -8,14 +8,23 @@ class Player {
 	var property vida = 150
 	var vivo = true
 	var flag = 0
+	var lastPosition = game.at(1,2)
 	var property position = game.at(1, 2)
-	const property inventario = #{new Fusil(), new Espada(), new Escopeta(), new BotiquinP(), new BotiquinM(), new BotiquinG()}
+	//const property inventario = #{new Fusil(), new Espada(), new Escopeta(), new BotiquinP(), new BotiquinM(), new BotiquinG()}
+	var property armaEquipada = new Espada(tomado = true)
 	
-	method image() = "sprites/player/player_0.png"
+	method image() {
+		if (armaEquipada.toString() == "un/a  Espada") return "sprites/player/player_5.png"
+		if (armaEquipada.toString() == "un/a  Fusil") return "sprites/player/player_6.png"
+		if (armaEquipada.toString() == "un/a  Escopeta") return "sprites/player/player_1.png"
+		return "sprites/player/player_2.png"
+	}
+	
+	/*
 	method image2() = "sprites/player/player_2.png"
 	method image3() = "sprites/player/player_5.png"
 	method image4() = "sprites/player/player_6.png"
-
+	
 	method encontrarArma(arma) {
 		if (inventario.contains(arma)) arma.agregarMunicion(arma.municionBase())
 		inventario.add(arma)
@@ -26,6 +35,7 @@ class Player {
 		inventario.add(curacion)
 	}
 	
+	
 	method ataque(arma) {
     	if (inventario.contains(arma)) {
         	arma.usar()
@@ -35,6 +45,15 @@ class Player {
         	return arma.danio()
     	}
     	return 0
+	}
+	*/
+	
+	method dropArmaEquipada() {
+		armaEquipada.position(lastPosition)
+		armaEquipada.tomado(false)
+		armaEquipada.activar()
+		world.addObjetoHabitacionActual(armaEquipada)
+		armaEquipada = null
 	}
 	
 	method recargar(arma) = arma.recargar()
@@ -68,6 +87,8 @@ class Player {
 	}
 	
 	method move(dir){
+		lastPosition = position
+		
 		if (dir == 0) position = position.up(1)
 		if (dir == 1) position = position.right(1)
 		if (dir == 2) position = position.down(1)

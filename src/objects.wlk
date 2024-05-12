@@ -1,7 +1,11 @@
 import wollok.game.*
+import world.*
 
 class Armas {
 	const property imagenBalas = "sprites/weapons/balas.png"
+	
+	var property position = game.at(0,0)
+	var property tomado = false;
 	
 	method municion() = null
 	
@@ -12,6 +16,22 @@ class Armas {
 	method usar() {}
 	
 	method recargar() = null
+	
+	method activar() {
+		if (not game.hasVisual(self))
+			game.addVisual(self)
+	}
+	method desactivar() {
+		if (game.hasVisual(self)) 
+			game.removeVisual(self)
+	}
+	method collide(p) {
+		tomado = true;
+		game.removeVisual(self)
+		world.removeObjetoHabitacionActual(self)
+		p.dropArmaEquipada()
+		p.armaEquipada(self)
+	}
 }
 
 class Escopeta inherits Armas {
@@ -44,6 +64,8 @@ class Escopeta inherits Armas {
 			return municionUtilizable	
 		}
 	}
+	
+	method image() = "sprites/weapons/ShootGun_0.png"
 }
 
 class Espada inherits Armas {
@@ -66,6 +88,8 @@ class Espada inherits Armas {
 	override method recargar() {
 		return null
 	}
+	
+	method image() = "sprites/weapons/sword_normal.png"
 }
 
 class Fusil inherits Armas {
@@ -98,37 +122,25 @@ class Fusil inherits Armas {
 			return municionUtilizable	
 		}
 	}
+	
+	method image() = "sprites/weapons/fusil.png"
 }
 
 //Items de armas. Estas son los pickups de armas ubicables en el mapa
 class Item {
-	var property position = game.at(0,0)
-	var tomado = false;
 	
-	method activar() {
-		if (not tomado)
-			game.addVisual(self)
-	}
-	method desactivar() {
-		if (game.hasVisual(self)) 
-			game.removeVisual(self)
-	}
-	method collide(p) {
-		tomado = true;
-		game.removeVisual(self)
-	}
 }
 
 class ItemEspada inherits Item{
-	method image() = "sprites/weapons/sword_normal.png"
+	
 }
 
 class ItemFusil inherits Item{
-	method image() = "sprites/weapons/fusil.png"
+	
 }
 
 class ItemEscopeta inherits Item{
-	method image() = "sprites/weapons/ShootGun_0.png"
+	
 }
 
 class Curacion {	
