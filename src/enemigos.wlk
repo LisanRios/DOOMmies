@@ -20,7 +20,10 @@ class Enemigo {
 	
 	method activar() {game.addVisual(self)}
 	method desactivar() {game.removeVisual(self)}
-	method collide(p) {game.say(self, "ATAQUE")}
+	method collide(p) {
+		game.say(self, "AAAAAA")
+		self.ataque(p)
+	}
 }
 
 class Minions inherits Enemigo{
@@ -39,6 +42,7 @@ class Minions inherits Enemigo{
 	}
 	
 	method image() = "sprites/monsters/minion.png"
+	
 }
 
 class Soldado inherits Enemigo{

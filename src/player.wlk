@@ -10,6 +10,7 @@ class Player {
 	var flag = 0
 	var property position = game.at(1, 2)
 	const property inventario = #{new Fusil(), new Espada(), new Escopeta(), new BotiquinP(), new BotiquinM(), new BotiquinG()}
+	var property armadura = 100
 	
 	method image() = "sprites/player/player_0.png"
 	method image2() = "sprites/player/player_2.png"
@@ -39,13 +40,15 @@ class Player {
 	
 	method recargar(arma) = arma.recargar()
 	
-	method danio(cant) {
-		vida -= cant
-		
-		if (vida <= 0) {
-			self.morir()
+	method danio(danio) {
+		if(armadura >= 0){
+			armadura -= danio
+		} else {
+			vida -= danio
+			if (vida <= 0) {
+				self.morir()
+			}
 		}
-		return vida
 	}
 	
 	method curacion(curacion) {
@@ -64,6 +67,7 @@ class Player {
 	
 	method morir() {
 		vivo = false
+		game.stop()
 		return vivo
 	}
 	

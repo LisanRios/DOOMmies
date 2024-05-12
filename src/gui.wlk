@@ -12,7 +12,7 @@ object gui {
 	}
 	
 	method update() {
-		healthLabel.update("SALUD: " + player.vida().toString() + "\nARMADURA: 100")
+		healthLabel.update("SALUD: " + player.vida().toString() + "\nARMADURA: " + player.armadura().toString())
 	}
 }
 
