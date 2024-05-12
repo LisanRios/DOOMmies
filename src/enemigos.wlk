@@ -58,6 +58,8 @@ class Enemigo {
 		game.say(self, "AAAAAA")
 		self.ataque(p)
 	}
+	
+	method ataque(p) {}
 }
 
 class Minions inherits Enemigo{
@@ -75,7 +77,7 @@ class Minions inherits Enemigo{
 		}
 	}
 	
-	method ataque(jugador){
+	override method ataque(jugador){
 		jugador.danio(ataque)
 	}
 	
@@ -103,7 +105,7 @@ class Soldado inherits Enemigo{
 		}
 	}
 	
-	method ataque(jugador){
+	override method ataque(jugador){
 		jugador.danio(ataque)
 	}
 	
@@ -129,7 +131,7 @@ class Demonio inherits Enemigo{
 		}
 	}
 	
-	method ataque(jugador){
+	override method ataque(jugador){
 		jugador.danio(ataque)
 	}
 	
@@ -149,7 +151,7 @@ class Jefe inherits Enemigo {
 		}
 	}
 	
-	method ataque(jugador){
+	override method ataque(jugador){
 		jugador.danio(ataque)
 	}
 	

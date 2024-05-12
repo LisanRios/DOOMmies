@@ -149,7 +149,7 @@ object world {
 class Habitacion{
 	var position = [0,0]
 	var property adyacentes = [null, null, null, null] //Arriba, Derecha, Abajo, Izquierda
-	var tipo = HabitacionNormal
+	var property tipo = HabitacionNormal
 	
 	var property entidades = []
 	
@@ -266,6 +266,15 @@ object HabitacionPowerup inherits TipoHabitacion {
 		]),
 		new Template(entradas = [
 			[1003, new Position(x = 7, y = 11)]
+		]),
+		new Template(entradas = [
+			[1501, new Position(x = 7, y = 11)]
+		]),
+		new Template(entradas = [
+			[1502, new Position(x = 7, y = 11)]
+		]),
+		new Template(entradas = [
+			[1503, new Position(x = 7, y = 11)]
 		])
 	]
 }
@@ -284,7 +293,9 @@ object EntityIdSystem {
 		if (id == 1001) {return new Espada()}
 		if (id == 1002) {return new Fusil()}
 		if (id == 1003) {return new Escopeta()}
-		if (id == 65535) { return new TestEntity() }
+		if (id == 1501) {return new BotiquinP()}
+		if (id == 1502) {return new BotiquinM()}
+		if (id == 1503) {return new BotiquinG()}
 		return null
 	}
 }
@@ -293,26 +304,27 @@ class Template {
 	var property entradas = [] //Cada entrada es un ID de entidad y un objeto Position
 }
 
-//Esto deberia ir en un archivo de entidades
-class Entidad {
+class Puerta{
 	var property position = game.at(0,0)
-	method activar() {game.addVisual(self)}
-	method desactivar() {game.removeVisual(self)}
-}
-
-class Puerta inherits Entidad {
 	var property direction = 0
 	var property playerPos = null
 	
-	method image() = "sprites/door/door_0.png"
+	method activar() {game.addVisual(self)}
+	method desactivar() {game.removeVisual(self)}
+	method image() {
+		
+		if (world.habitacion_actual().adyacentes().get(direction).tipo() == HabitacionJefe) {
+			return "sprites/door/door_boss.png"
+		}
+		
+		if (world.habitacion_actual().adyacentes().get(direction).tipo() == HabitacionPowerup) {
+			return "sprites/door/door_powerup.png"
+		}
+		
+		return "sprites/door/door_0.png"
+	}
 	method collide(p) {
 		p.position(playerPos)
 		world.cambiarHabitacionAdyacente(direction)
 	}
-}
-
-class TestEntity inherits Entidad {
-	var activado = false
-	
-	method image() = "sprites/test/testsprite_0.png"
 }

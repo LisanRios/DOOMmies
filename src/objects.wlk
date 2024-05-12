@@ -1,23 +1,10 @@
 import wollok.game.*
 import world.*
 
-class Armas {
-	
-	
+//Clase madre para los pickups de arma y curacion
+class Pickup {
 	var property position = game.at(0,0)
 	var property tomado = false;
-	
-	method municion() = null
-	
-	method danio() = null
-	
-	method agregarMunicion(cant) {}
-	
-	method usar(posicion) {}
-	
-	method recargar() = null
-	
-	
 	
 	method activar() {
 		if (not game.hasVisual(self))
@@ -31,6 +18,32 @@ class Armas {
 		tomado = true;
 		game.removeVisual(self)
 		world.removeObjetoHabitacionActual(self)
+	}
+}
+
+class Armas inherits Pickup{
+	method municion() = null
+	
+	method danio() = null
+	
+	method agregarMunicion(cant) {}
+	
+	method usar(posicion) {}
+	
+	method recargar() = null
+	
+	override method collide(p) {
+		super(p)
+		p.dropArmaEquipada()
+		p.armaEquipada(self)
+	}
+}
+
+class Curacion inherits Pickup{	
+	method efecto() = null
+	
+	override method collide(p) {
+		super(p)
 		p.dropArmaEquipada()
 		p.armaEquipada(self)
 	}
@@ -151,10 +164,6 @@ class Bala {
 			game.removeVisual(self)
 		} 
 	}
-}
-
-class Curacion {	
-	method efecto() = null
 }
 
 class BotiquinP inherits Curacion {
