@@ -161,12 +161,16 @@ class BotiquinP inherits Curacion {
 	const salud = 25
 	
 	override method efecto() = salud
+	
+	method image() = "sprites/healing/botiquin0.png"
 }
 
 class BotiquinM inherits Curacion {
 	const salud = 50
 	
 	override method efecto() = salud
+	
+	method image() = "sprites/healing/botiquin1.png"
 }
 
 class BotiquinG inherits Curacion {
@@ -174,4 +178,5 @@ class BotiquinG inherits Curacion {
 	
 	override method efecto() = salud
 
+	method image() = "sprites/healing/botiquin2.png"
 }
