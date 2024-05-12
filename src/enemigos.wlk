@@ -2,6 +2,7 @@ import wollok.game.*
 import world.*
 import graphics.*
 import player.*
+import objects.*
 
 
 class Enemigo {
@@ -67,6 +68,10 @@ class Minions inherits Enemigo{
 		vida -= danio
 		if(vida <= 0){
 			vivo = false
+			var escudo = new Escudo()
+			var player = new Player()
+			escudo.escudo(5)
+			player.armadura(escudo)
 		}
 	}
 	
@@ -89,6 +94,12 @@ class Soldado inherits Enemigo{
 			armadura -= danio
 		} else {
 			vida -= danio
+			if (vida <= 0) {
+			var escudo = new Escudo()
+			var player = new Player()
+			escudo.escudo(30)
+			player.armadura(escudo)
+			}
 		}
 	}
 	
@@ -109,6 +120,12 @@ class Demonio inherits Enemigo{
 			armadura -= danio
 		} else {
 			vida -= danio
+			if (vida <= 0){
+			var escudo = new Escudo()
+			var player = new Player()
+			escudo.escudo(50)
+			player.armadura(escudo)
+			}
 		}
 	}
 	

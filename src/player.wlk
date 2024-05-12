@@ -69,6 +69,11 @@ class Player {
 		else vida += curacion.efecto()
 	}
 	
+	method armadura(escudo) {
+		if (armadura + escudo.efecto() > 100) armadura += (100 - armadura)
+		else armadura += escudo.efecto() 
+	}
+	
 	method estaVivo() = vivo
 	
 	method morir() {

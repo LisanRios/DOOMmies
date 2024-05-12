@@ -180,3 +180,9 @@ class BotiquinG inherits Curacion {
 
 	method image() = "sprites/healing/botiquin2.png"
 }
+
+class Escudo inherits Curacion {
+	var property escudo = 0
+	
+	override method efecto() = escudo
+}
