@@ -49,3 +49,4 @@ class guiLabel {
 class guiLabelNumberDigit {
 	
 }
+
