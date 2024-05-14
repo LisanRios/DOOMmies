@@ -15,7 +15,7 @@ program main {
 	
 	world.generateWorld(10)
 	
-	game.title("League of Legends")
+	game.title("League of Legends, osea el mather fucker LOL")
 	
 	var player = new Player()
 	game.addVisual(player)

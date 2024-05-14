@@ -44,8 +44,13 @@ class Player {
 	method recargar(arma) = arma.recargar()
 	
 	method danio(danio) {
-		if(armadura >= 0){
+		if(armadura > 0){
 			armadura -= danio
+			if (armadura < danio){
+				var resto = -(armadura - danio)
+				armadura = 0
+				vida -= resto
+			}
 		} else {
 			vida -= danio
 			if (vida <= 0) {
@@ -56,6 +61,7 @@ class Player {
 	
 	method curacion(curacion) {
 		if (vida + curacion.efecto() > 150) vida += (150 - vida)
+		
 		else vida += curacion.efecto()
 	}
 	

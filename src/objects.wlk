@@ -41,13 +41,12 @@ class Armas inherits Pickup{
 }
 
 class Curacion inherits Pickup{	
-	method efecto() = null
-	
-	override method collide(p) {
-		super(p)
-		p.dropArmaEquipada()
-		p.armaEquipada(self)
+	//var salud = 100
+
+	override method collide(player) {
+		super(player)
 	}
+
 }
 
 class Escopeta inherits Armas {
@@ -135,7 +134,7 @@ class Fusil inherits Armas {
 	
 	override method usar(posicion, dir) {
 		bulletManager.shootBullet(posicion, dir)
-		//municionUtilizable -= 1
+		municionUtilizable -= 1
 	}
 	
 	override method recargar() {
@@ -222,35 +221,53 @@ class Bala {
 		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()
 	}
 	
-	method collide(p) {}
+	method collide(p) {
+		/*
+		 * programar colicion en enemigos :)
+		 * 
+		 */
+	}
 }
 
 class BotiquinP inherits Curacion {
 	const salud = 25
+	var numero = 0
 	
-	override method efecto() = salud
+	method image() = "sprites/healing/botiquin¨" +numero+ ".png"
 	
-	method image() = "sprites/healing/botiquin0.png"
+	override method collide(player){
+		super(player)
+		var algo = player.vida() + salud
+		player.vida(algo)
+	}
 }
 
 class BotiquinM inherits Curacion {
 	const salud = 50
 	
-	override method efecto() = salud
-	
 	method image() = "sprites/healing/botiquin1.png"
+	
+	override method collide(player){
+		super(player)
+		var algo = player.vida() + salud
+		player.vida(algo)
+	}
 }
 
 class BotiquinG inherits Curacion {
 	const salud = 75
 	
-	override method efecto() = salud
-
 	method image() = "sprites/healing/botiquin2.png"
+	
+	override method collide(player){
+		super(player)
+		var algo = player.vida() + salud
+		player.vida(algo)
+	}
 }
 
 class Escudo inherits Curacion {
 	var property escudo = 0
 	
-	override method efecto() = escudo
+	//override method efecto() = escudo
 }

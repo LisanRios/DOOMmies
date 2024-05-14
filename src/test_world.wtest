@@ -2,7 +2,7 @@ import world.*
 
 describe "Tests de generacion de mundo" {
 	method initialize() {
-		
+		// hay test aprobanos <3
 	}
 	
 	test "Si genera con ocho habitaciones termina con nueve, tiene que tener un playerstart y una habitacion de jefe" {
