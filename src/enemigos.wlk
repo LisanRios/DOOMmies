@@ -34,6 +34,11 @@ class Enemigo {
 		if (player.position().y() > position.y() and not self.mismoTipoEnPosicion(position.up(1)) ) {
 			position = position.up(1)
 		}
+		
+		//Colision con el jugador
+		if (player.position() == position) {
+			self.ataque(player)
+		}
 	}
 	
 	method mismoTipoEnPosicion(pos) {
@@ -55,7 +60,6 @@ class Enemigo {
 		game.removeVisual(self)
 	}
 	method collide(p) {
-		game.say(self, "AAAAAA")
 		self.ataque(p)
 	}
 	
@@ -78,6 +82,7 @@ class Minions inherits Enemigo{
 	}
 	
 	override method ataque(jugador){
+		game.say(self, "AAAAAA")
 		jugador.danio(ataque)
 	}
 	
@@ -106,6 +111,7 @@ class Soldado inherits Enemigo{
 	}
 	
 	override method ataque(jugador){
+		game.say(self, "AAAAAA")
 		jugador.danio(ataque)
 	}
 	
@@ -132,6 +138,7 @@ class Demonio inherits Enemigo{
 	}
 	
 	override method ataque(jugador){
+		game.say(self, "AAAAAA")
 		jugador.danio(ataque)
 	}
 	
@@ -152,6 +159,7 @@ class Jefe inherits Enemigo {
 	}
 	
 	override method ataque(jugador){
+		game.say(self, "AAAAAA")
 		jugador.danio(ataque)
 	}
 	

@@ -21,7 +21,12 @@ class AnimatedSprite {
 	
 	//Para la animacion
 	method stop() {
-		game.removeTickEvent(animationId)
+		try{
+			game.removeTickEvent(animationId)
+		}
+		catch e: Exception{
+			//Nada, ya se que no existe la animacion lol
+		}
 		frame  = 0
 	}
 	

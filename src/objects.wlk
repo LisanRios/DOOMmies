@@ -1,5 +1,6 @@
 import wollok.game.*
 import world.*
+import graphics.*
 
 //Clase madre para los pickups de arma y curacion
 class Pickup {
@@ -184,14 +185,24 @@ object bulletManager {
 }
 
 class Bala {
-	const property image = "sprites/weapons/balas.png"
+	var sprite = new AnimatedSprite(frame_duration = 100, images=[
+		"sprites/weapons/bala_0.png",
+		"sprites/weapons/bala_1.png",
+		"sprites/weapons/bala_2.png",
+		"sprites/weapons/bala_3.png"
+	])
+	var spriteManager = new AnimatedSpriteManager(sprite = sprite)
 	
 	var property position = game.at(0,0)
 	var property direction = 0
 	
 	method initialize() {
+		spriteManager.setSprite(sprite)
+		spriteManager.play()
 		game.onTick(200, self.identity().toString()+"_moverTiro", { => self.moverBala() }) //Hace un evento para mover por instancia
 	}
+	
+	method image() = sprite.image()
 	
 	method moverBala() {
 		if (not self.outsideScreen()){ //Solo mueve las balas si estan dentro de la pantalla, para que no se acumulen los objetos Position()
