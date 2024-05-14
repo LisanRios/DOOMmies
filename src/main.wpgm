@@ -7,6 +7,7 @@ import player.*
 import enemigos.*
 import objects.*
 import gui.*
+import audio.*
 
 program main {
 	game.width(15)
@@ -14,7 +15,7 @@ program main {
 	
 	world.generateWorld(10)
 	
-	game.title("DOOM")
+	game.title("League of Legends")
 	
 	var player = new Player()
 	game.addVisual(player)

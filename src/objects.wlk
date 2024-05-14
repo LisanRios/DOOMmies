@@ -51,6 +51,8 @@ class Curacion inherits Pickup{
 }
 
 class Escopeta inherits Armas {
+	var property playerSprite = "sprites/player/player_1.png"
+	
 	const property municionBase = 5
 	var municionDisponible = 0
 	var municionUtilizable = 5
@@ -88,6 +90,8 @@ class Escopeta inherits Armas {
 }
 
 class Espada inherits Armas {
+	var property playerSprite = "sprites/player/player_5.png"
+	
 	const property municionBase = 0
 	var municionUtilizable = 5
 	var danio = 5
@@ -113,6 +117,8 @@ class Espada inherits Armas {
 }
 
 class Fusil inherits Armas {
+	var property playerSprite = "sprites/player/player_6.png"
+	
 	const property municionBase = 14
 	var municionDisponible = 0
 	var municionUtilizable = 14
@@ -164,7 +170,6 @@ object bulletManager {
 	}
 	
 	method shootBullet(pos, dir) {
-		console.println("Bala: "+puntero.toString())
 		balas.get(puntero).position(pos)
 		balas.get(puntero).direction(dir)
 		self.proxBala()
@@ -179,7 +184,6 @@ object bulletManager {
 	}
 	
 	method resetBullets() {
-		console.println(balas.toString())
 		balas.forEach({b => b.position(game.at(-1, -1))})
 	}
 }

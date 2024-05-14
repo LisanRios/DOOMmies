@@ -13,9 +13,9 @@ class Player {
 	var property armadura = 100
 	
 	method image() {
-		if (armaEquipada.toString() == "un/a  Espada") return "sprites/player/player_5.png"
-		if (armaEquipada.toString() == "un/a  Fusil") return "sprites/player/player_6.png"
-		if (armaEquipada.toString() == "un/a  Escopeta") return "sprites/player/player_1.png"
+		if (armaEquipada.playerSprite() != null) {
+			return armaEquipada.playerSprite()
+		}
 		return "sprites/player/player_2.png"
 	}
 	

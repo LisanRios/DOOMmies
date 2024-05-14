@@ -1,6 +1,7 @@
 import wollok.game.*
 import enemigos.*
 import objects.*
+import audio.*
 
 //Objeto que maneja y genera el mundo
 object world {
@@ -202,9 +203,9 @@ class Habitacion{
 	}
 	
 	method activar(){
-		console.println(tipo.background())
 		game.ground(tipo.background())
 		entidades.forEach({entidad => entidad.activar()})
+		audioManager.play(tipo.song())
 	}
 	
 	method desactivar(){
@@ -225,6 +226,7 @@ class Habitacion{
 }
 
 class TipoHabitacion {
+	method song() = 0
 	method templates() = []
 	method background() = "backgrounds/infierno.png"
 }
@@ -248,8 +250,11 @@ object HabitacionNormal inherits TipoHabitacion {
 		])
 	]
 }
-object HabitacionPlayerSpawn inherits TipoHabitacion {}
+object HabitacionPlayerSpawn inherits TipoHabitacion {
+	override method song() = -1
+}
 object HabitacionJefe inherits TipoHabitacion {
+	override method song() = 2
 	override method background() = "backgrounds/ladrillo.png"
 	override method templates() = [
 		new Template(entradas = [
@@ -258,6 +263,7 @@ object HabitacionJefe inherits TipoHabitacion {
 	]
 }
 object HabitacionPowerup inherits TipoHabitacion {
+	override method song() = 1
 	override method templates() = [
 		new Template(entradas = [
 			[1001, new Position(x = 7, y = 11)]
