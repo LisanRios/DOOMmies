@@ -39,6 +39,7 @@ class guiLabel {
 	var txt = "TEST"
 	
 	method text() = txt
+	method textColor() = "FFFFFFFF"
 	method update(t) {
 		txt = t
 	}
