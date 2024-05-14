@@ -20,14 +20,6 @@ program main {
 	game.addVisual(player)
 	world.player(player)
 	
-	var escopeta = new Escopeta(municionUtilizable = 100000)
-	var espada = new Espada(municionUtilizable = 100000)
-	var fusil = new Fusil(municionUtilizable = 100000)
-	var botiquinp = new BotiquinP()
-	var botiquinm = new BotiquinM()
-	var botiquing = new BotiquinG()
-	
-	 
 	gui.player (player)
 	gui.init()
 	

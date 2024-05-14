@@ -19,22 +19,12 @@ class Player {
 		return "sprites/player/player_2.png"
 	}
 	
-	/*
-	method image2() = "sprites/player/player_2.png"
-	method image3() = "sprites/player/player_5.png"
-	method image4() = "sprites/player/player_6.png"
-	
-	method encontrarArma(arma) {
-		if (inventario.contains(arma)) arma.agregarMunicion(arma.municionBase())
-		inventario.add(arma)
-	}
-	*/
 	method encontrarCuracion(curacion) {
 			self.curacion(curacion)
 		}
 
-	method ataque() {
-        	armaEquipada.usar(position)
+	method ataque(dir) {
+        	armaEquipada.usar(position, dir)
         	//armaEquipada.municion()
          // Crear una bala y mostrarla en la posición actual del jugador
         	//game.addVisualCharacterIn(arma, position)
@@ -95,13 +85,17 @@ class Player {
 	}
 	
 	method initialize() {
-		keyboard.up().onPressDo({self.move(0)})
-		keyboard.right().onPressDo({self.move(1)})
-		keyboard.down().onPressDo({self.move(2)})
-		keyboard.left().onPressDo({self.move(3)})	
+		keyboard.w().onPressDo({self.move(0)})
+		keyboard.d().onPressDo({self.move(1)})
+		keyboard.s().onPressDo({self.move(2)})
+		keyboard.a().onPressDo({self.move(3)})	
 		//keyboard.z().onPressDo({self.ataque(escopeta)}) // Ataque con Escopeta
     	//keyboard.x().onPressDo({self.ataque(espada)})   // Ataque con Espada
-    	keyboard.space().onPressDo({self.ataque()}) // Ataque con Fusil
+    	keyboard.up().onPressDo({self.ataque(0)}) 
+    	keyboard.right().onPressDo({self.ataque(1)}) 
+    	keyboard.down().onPressDo({self.ataque(2)}) 
+    	keyboard.left().onPressDo({self.ataque(3)}) 
+    	
 	}
 
 }

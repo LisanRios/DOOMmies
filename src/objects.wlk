@@ -28,7 +28,7 @@ class Armas inherits Pickup{
 	
 	method agregarMunicion(cant) {}
 	
-	method usar(posicion) {}
+	method usar(posicion, dir) {}
 	
 	method recargar() = null
 	
@@ -65,11 +65,8 @@ class Escopeta inherits Armas {
 	
 
 	
-	override method usar(posicion) {
-		var municion = new Bala()
-		municion.position(posicion)
-		game.addVisual(municion) 
-		game.onTick(3, "tiroEscopeta", { => municion.moverBala(posicion) })
+	override method usar(posicion, dir) {
+		bulletManager.shootBullet(posicion, dir)
 		//municionUtilizable -= 1
 	}
 	
@@ -102,7 +99,7 @@ class Espada inherits Armas {
 		danio += cant
 	}
 	
-	override method usar(posicion) {
+	override method usar(posicion, dir) {
 	
 		danio += municionBase
 	}
@@ -129,11 +126,8 @@ class Fusil inherits Armas {
 	}
 	
 	
-	override method usar(posicion) {
-		var municion = new Bala()
-		municion.position(posicion)
-		game.addVisual(municion) 
-		game.onTick(3, "tiroEscopeta", { => municion.moverBala(posicion) })
+	override method usar(posicion, dir) {
+		bulletManager.shootBullet(posicion, dir)
 		//municionUtilizable -= 1
 	}
 	
@@ -153,17 +147,67 @@ class Fusil inherits Armas {
 	method image() = "sprites/weapons/fusil.png"
 }
 
+object bulletManager {
+	var cantidadBalas = 12
+	var balas = []
+	var puntero = 0 //Posicion del array con la bala a disparar, se eligiria la bala con FIFO
+	
+	method initialize() {
+		var cBalas = new Range(start = 1, end = cantidadBalas)
+		cBalas.forEach({c => 
+			var bala = new Bala()
+			bala.position(game.at(-1, -1))
+			game.addVisual(bala)
+			balas.add(bala)
+		})
+	}
+	
+	method shootBullet(pos, dir) {
+		console.println("Bala: "+puntero.toString())
+		balas.get(puntero).position(pos)
+		balas.get(puntero).direction(dir)
+		self.proxBala()
+	}
+	
+	method removeBullet(b) {
+		b.position(game.at(-1, -1))
+	}
+	
+	method proxBala() {
+		puntero = (puntero + 1) % cantidadBalas 
+	}
+	
+	method resetBullets() {
+		console.println(balas.toString())
+		balas.forEach({b => b.position(game.at(-1, -1))})
+	}
+}
+
 class Bala {
 	const property image = "sprites/weapons/balas.png"
 	
 	var property position = game.at(0,0)
+	var property direction = 0
 	
-	method moverBala(posicion) {
-		position = position.right(1)
-		if (position.x() == 5 ){
-			game.removeVisual(self)
-		} 
+	method initialize() {
+		game.onTick(200, self.identity().toString()+"_moverTiro", { => self.moverBala() }) //Hace un evento para mover por instancia
 	}
+	
+	method moverBala() {
+		if (not self.outsideScreen()){ //Solo mueve las balas si estan dentro de la pantalla, para que no se acumulen los objetos Position()
+			if (direction == 0) position = position.up(1)
+			if (direction == 1) position = position.right(1)
+			if (direction == 2) position = position.down(1)
+			if (direction == 3) position = position.left(1)
+			
+		}
+	}
+	
+	method outsideScreen() {
+		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()
+	}
+	
+	method collide(p) {}
 }
 
 class BotiquinP inherits Curacion {
