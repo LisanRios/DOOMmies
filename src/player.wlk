@@ -24,20 +24,7 @@ class Player {
 		}
 
 	method ataque(dir) {
-        armaEquipada.usar(position, dir )
-        	
-        	
-        var bala = new Bala()
-    	bala.position(position) // La posición inicial de la bala es la misma que la del jugador
-    	bala.direction(dir) // La dirección de la bala es la misma que la dirección del ataque
-		
-    	// Agregar la bala al juego
-    	game.addVisual(bala)
-
-    	// Mover la bala
-    	bala.moverBala()
-    	
-    	
+        armaEquipada.usar(position, dir)
 	}
 	method defensa(danio){}
 	
@@ -89,10 +76,10 @@ class Player {
 	method move(dir){
 		lastPosition = position
 		
-		if (dir == 0) position = position.up(1)
-		if (dir == 1) position = position.right(1)
-		if (dir == 2) position = position.down(1)
-		if (dir == 3) position = position.left(1)
+		if (dir == 0 and position.y() < game.height() -1) position = position.up(1)
+		if (dir == 1 and position.x() < game.width() -1) position = position.right(1)
+		if (dir == 2 and position.y() > 0) position = position.down(1)
+		if (dir == 3 and position.x() > 0) position = position.left(1)
 		
 		var col = game.colliders(self)
 		col.forEach({col => col.collide(self)})

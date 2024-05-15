@@ -19,9 +19,10 @@ class Enemigo {
 	method estaVivo() = vivo
 	
 	method perseguirJugador() {
+		if (not game.hasVisual(self)) {return 0} //Por seguridad si justo es llamado cuando no tiene visual
+		
 		var player = world.player()
 		var positioncand = null
-		self.colisiones()
 		
 		if (player.position().x() < position.x() and not self.mismoTipoEnPosicion(position.left(1)) ) {
 			position = position.left(1)
@@ -40,11 +41,8 @@ class Enemigo {
 		if (player.position() == position) {
 			self.ataque(player)
 		}
-	}
-	
-	method colisiones(){
-		var col = game.colliders(self)
-		col.forEach({col => col.collide(self)})
+		
+		return 0
 	}
 	
 	method mismoTipoEnPosicion(pos) {
@@ -56,14 +54,30 @@ class Enemigo {
 	}
 	
 	method activar() {
+		if (not vivo) return 0
+		
 		if (posicionOriginal == null) posicionOriginal = position
 		position = posicionOriginal
-		game.onTick(500, self.identity().toString()+"_perseguir", {self.perseguirJugador()})
+		game.onTick(500, self.identity().toString()+"_perseguir", {=>self.perseguirJugador()})
+		game.onTick(50, self.identity().toString()+"_colisionBala", {=>self.colisionBala()})
 		game.addVisual(self)
-		
+		return 0
 	}
+	
+	//El enemigo ve si toca una bala cada 50 ms, si toca una bala la elimina y resta vida
+	method colisionBala() {
+		var col = game.colliders(self)
+		col.forEach({col =>
+			if (bulletManager.balas().contains(col)){
+				self.defensa(col.danio())
+				bulletManager.removeBullet(col)
+			}
+		})
+	}
+	
 	method desactivar() {
 		game.removeTickEvent(self.identity().toString()+"_perseguir")
+		game.removeTickEvent(self.identity().toString()+"_colisionBala")
 		game.removeVisual(self)
 	}
 	method collide(p) {
@@ -71,6 +85,16 @@ class Enemigo {
 	}
 	
 	method ataque(p) {}
+	
+	method morir() {
+		if (vivo) {
+			vivo = false
+			game.removeVisual(self)
+			world.removeObjetoHabitacionActual(self)
+			game.removeTickEvent(self.identity().toString()+"_perseguir")
+			game.removeTickEvent(self.identity().toString()+"_colisionBala")
+		}
+	}
 }
 
 class Minions inherits Enemigo{
@@ -80,14 +104,7 @@ class Minions inherits Enemigo{
 	override method defensa(danio){
 		vida -= danio
 		if(vida <= 0){
-			vivo = false
-			game.removeVisual(self)
-			world.removeObjetoHabitacionActual(self)
-			/*
-			var escudo = new Escudo()
-			var player = new Player()
-			escudo.escudo(5)
-			player.armadura(escudo) */
+			self.morir()
 		}
 	}
 	
@@ -112,8 +129,7 @@ class Soldado inherits Enemigo{
 		} else {
 			vida -= danio
 			if (vida <= 0) {
-			game.removeVisual(self)
-			world.removeObjetoHabitacionActual(self)
+				self.morir()
 			}
 		}
 	}
@@ -137,8 +153,7 @@ class Demonio inherits Enemigo{
 		} else {
 			vida -= danio
 			if (vida <= 0){
-			game.removeVisual(self)
-			world.removeObjetoHabitacionActual(self)
+				self.morir()
 			}
 		}
 	}
@@ -162,9 +177,7 @@ class Jefe inherits Enemigo {
 		} else {
 			vida -= danio
 			if(vida <= 0){
-				game.removeVisual(self)
-				world.removeObjetoHabitacionActual(self)
-				game.say(self, "Ganaste")		
+				self.morir()	
 			}
 		}
 	}

@@ -152,9 +152,14 @@ class Fusil inherits Armas {
 	method image() = "sprites/weapons/fusil.png"
 }
 
+/*
+ * ANTES DE TOCAR NADA LEER
+ * 
+ */
+
 object bulletManager {
 	var cantidadBalas = 12
-	var balas = []
+	var property balas = []
 	var puntero = 0 //Posicion del array con la bala a disparar, se eligiria la bala con FIFO
 	
 	method initialize() {
@@ -189,7 +194,7 @@ object bulletManager {
 
 class Bala {
 	var property danio = 10000 
-	var sprite = new AnimatedSprite(frame_duration = 100, images=[
+	var sprite = new AnimatedSprite(frame_duration = 100, images = [
 		"sprites/weapons/bala_0.png",
 		"sprites/weapons/bala_1.png",
 		"sprites/weapons/bala_2.png",
@@ -214,7 +219,6 @@ class Bala {
 			if (direction == 1) position = position.right(1)
 			if (direction == 2) position = position.down(1)
 			if (direction == 3) position = position.left(1)
-			
 		}
 	}
 	
@@ -222,11 +226,7 @@ class Bala {
 		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()
 	}
 	
-	method collide(enemigo) {
-		enemigo.defensa(danio)
-		game.removeVisual(self)
-		world.removeObjetoHabitacionActual(self)
-	}
+	method collide(p) {} //NO TOCAR :) O LOS MATO
 }
 
 class BotiquinP inherits Curacion {
