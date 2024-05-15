@@ -41,7 +41,6 @@ class Armas inherits Pickup{
 }
 
 class Curacion inherits Pickup{	
-	//var salud = 100
 
 	override method collide(player) {
 		super(player)
@@ -68,7 +67,7 @@ class Escopeta inherits Armas {
 
 	
 	override method usar(posicion, dir) {
-		bulletManager.shootBullet(posicion, dir)
+		bulletManager.shootBullet(posicion, dir, danio)
 		//municionUtilizable -= 1
 	}
 	
@@ -133,7 +132,7 @@ class Fusil inherits Armas {
 	
 	
 	override method usar(posicion, dir) {
-		bulletManager.shootBullet(posicion, dir)
+		bulletManager.shootBullet(posicion, dir, danio)
 		municionUtilizable -= 1
 	}
 	
@@ -168,9 +167,10 @@ object bulletManager {
 		})
 	}
 	
-	method shootBullet(pos, dir) {
+	method shootBullet(pos, dir, danio) {
 		balas.get(puntero).position(pos)
 		balas.get(puntero).direction(dir)
+		balas.get(puntero).danio(danio)
 		self.proxBala()
 	}
 	
@@ -188,6 +188,7 @@ object bulletManager {
 }
 
 class Bala {
+	var property danio = 10000 
 	var sprite = new AnimatedSprite(frame_duration = 100, images=[
 		"sprites/weapons/bala_0.png",
 		"sprites/weapons/bala_1.png",
@@ -221,48 +222,51 @@ class Bala {
 		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()
 	}
 	
-	method collide(p) {
-		/*
-		 * programar colicion en enemigos :)
-		 * 
-		 */
+	method collide(enemigo) {
+		enemigo.defensa(danio)
+		game.removeVisual(self)
+		world.removeObjetoHabitacionActual(self)
 	}
 }
 
 class BotiquinP inherits Curacion {
 	const salud = 25
 	var numero = 0
+
+	method image() = "sprites/healing/botiquin " +numero+ ".png"
 	
-	method image() = "sprites/healing/botiquin¨" +numero+ ".png"
 	
 	override method collide(player){
 		super(player)
-		var algo = player.vida() + salud
-		player.vida(algo)
+		var curacion = player.vida() + salud
+		player.vida(curacion)
 	}
 }
 
 class BotiquinM inherits Curacion {
 	const salud = 50
-	
-	method image() = "sprites/healing/botiquin1.png"
-	
+	const numero = 1
+		
+	method image() = "sprites/healing/botiquin " +numero+ ".png"
+		
 	override method collide(player){
 		super(player)
-		var algo = player.vida() + salud
-		player.vida(algo)
+		var curacion = player.vida() + salud
+		player.vida(curacion)
 	}
 }
 
 class BotiquinG inherits Curacion {
 	const salud = 75
+	const numero = 2
 	
-	method image() = "sprites/healing/botiquin2.png"
+	method image() = "sprites/healing/botiquin " +numero+ ".png"
 	
+		
 	override method collide(player){
 		super(player)
-		var algo = player.vida() + salud
-		player.vida(algo)
+		var curacion = player.vida() + salud
+		player.vida(curacion)
 	}
 }
 
