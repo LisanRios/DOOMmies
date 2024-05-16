@@ -101,9 +101,9 @@ class Espada inherits Armas {
 	override method agregarMunicion(cant) {
 		danio += cant
 	}
-	
 	override method usar(posicion, dir) {
-	
+		var bala = bulletManager.attackSword(posicion, dir, danio)
+		bala.tipoArma("espada")  // Indica que la bala fue disparada por una espada
 		danio += municionBase
 	}
 	
@@ -154,8 +154,9 @@ class Fusil inherits Armas {
 
 /*
  * ANTES DE TOCAR NADA LEER
- * 
+ * -Por que lo dice tan brusco
  */
+
 
 object bulletManager {
 	var cantidadBalas = 12
@@ -179,6 +180,15 @@ object bulletManager {
 		self.proxBala()
 	}
 	
+	method attackSword(pos, dir, danio){
+		var bala = balas.get(puntero)
+		bala.position(pos)
+		bala.direction(dir)
+		bala.danio(danio)
+		self.proxBala()
+		return bala  // Devuelve la bala que se está disparando
+	}
+	
 	method removeBullet(b) {
 		b.position(game.at(-1, -1))
 	}
@@ -193,7 +203,8 @@ object bulletManager {
 }
 
 class Bala {
-	var property danio = 10000 
+	var property danio = 10000 	
+	var property tipoArma = "" 
 	var sprite = new AnimatedSprite(frame_duration = 100, images = [
 		"sprites/weapons/bala_0.png",
 		"sprites/weapons/bala_1.png",
@@ -204,6 +215,7 @@ class Bala {
 	
 	var property position = game.at(0,0)
 	var property direction = 0
+	var property pasos = 0 
 	
 	method initialize() {
 		spriteManager.setSprite(sprite)
@@ -214,11 +226,17 @@ class Bala {
 	method image() = sprite.image()
 	
 	method moverBala() {
-		if (not self.outsideScreen()){ //Solo mueve las balas si estan dentro de la pantalla, para que no se acumulen los objetos Position()
+		
+		if (not self.outsideScreen() and (tipoArma != "espada" or pasos <= 1)) { // Solo mueve las balas si están dentro de la pantalla y no han superado el límite de pasos (si fueron disparadas por una espada)
+	 //Solo mueve las balas si estan dentro de la pantalla, para que no se acumulen los objetos Position()
 			if (direction == 0) position = position.up(1)
 			if (direction == 1) position = position.right(1)
 			if (direction == 2) position = position.down(1)
 			if (direction == 3) position = position.left(1)
+		pasos+= 1   // Incrementa el contador de pasos
+		} else {
+			bulletManager.removeBullet(self)
+			pasos = 0  // Elimina la bala si ha superado el límite de pasos o está fuera de la pantalla
 		}
 	}
 	
@@ -233,7 +251,7 @@ class BotiquinP inherits Curacion {
 	const salud = 25
 	var numero = 0
 
-	method image() = "sprites/healing/botiquin " +numero+ ".png"
+	method image() = "sprites/healing/botiquin" +numero+ ".png"
 	
 	
 	override method collide(player){
@@ -247,7 +265,7 @@ class BotiquinM inherits Curacion {
 	const salud = 50
 	const numero = 1
 		
-	method image() = "sprites/healing/botiquin " +numero+ ".png"
+	method image() = "sprites/healing/botiquin" +numero+ ".png"
 		
 	override method collide(player){
 		super(player)
@@ -260,7 +278,7 @@ class BotiquinG inherits Curacion {
 	const salud = 75
 	const numero = 2
 	
-	method image() = "sprites/healing/botiquin " +numero+ ".png"
+	method image() = "sprites/healing/botiquin" +numero+ ".png"
 	
 		
 	override method collide(player){
