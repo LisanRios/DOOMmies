@@ -92,7 +92,7 @@ class Espada inherits Armas {
 	const property municionBase = 0
 	var municionUtilizable = 50
 	var municionDisponible = 0
-	var danio = 50
+	var danio = 15
 	
 	override method municion() = null
 	
@@ -101,11 +101,7 @@ class Espada inherits Armas {
 	override method agregarMunicion(cant) {
 		danio += cant
 	}
-	//override method usar(posicion, dir) {
-	//	bulletManager.shootBullet(posicion, dir, danio, "espada")  
-		//bulletManager.tipoArma("espada")  // Indica que la bala fue disparada por una espada
-	//}
-	
+
 	override method usar(posicion, dir) {
 		var bala = new Bala()  // Creamos una nueva bala cada vez que disparas
 		bala.position(posicion)
