@@ -15,6 +15,10 @@ object world {
 	var tipos_habitacion = [
 			HabitacionPowerup,
 			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
+			HabitacionPowerup,
 			HabitacionPowerup
 		]
 	

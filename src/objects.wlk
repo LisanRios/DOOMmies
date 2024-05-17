@@ -64,11 +64,10 @@ class Escopeta inherits Armas {
 		municionDisponible += cant
 	}
 	
-
-	
 	override method usar(posicion, dir) {
-		bulletManager.shootBullet(posicion, dir, danio)
-		//municionUtilizable -= 1
+		bulletManager.shootBullet(posicion, dir, danio,"escopeta")
+		//bulletManager.tipoArma("escopeta")  // Indica que la bala fue disparada por una escopeta
+		municionUtilizable -= 1
 	}
 	
 	override method recargar() {
@@ -91,8 +90,9 @@ class Espada inherits Armas {
 	var property playerSprite = "sprites/player/player_5.png"
 	
 	const property municionBase = 0
-	var municionUtilizable = 5
-	var danio = 5
+	var municionUtilizable = 50
+	var municionDisponible = 0
+	var danio = 50
 	
 	override method municion() = null
 	
@@ -101,14 +101,31 @@ class Espada inherits Armas {
 	override method agregarMunicion(cant) {
 		danio += cant
 	}
+	//override method usar(posicion, dir) {
+	//	bulletManager.shootBullet(posicion, dir, danio, "espada")  
+		//bulletManager.tipoArma("espada")  // Indica que la bala fue disparada por una espada
+	//}
+	
 	override method usar(posicion, dir) {
-		var bala = bulletManager.attackSword(posicion, dir, danio)
+		var bala = new Bala()  // Creamos una nueva bala cada vez que disparas
+		bala.position(posicion)
+		bala.direction(dir)
+		bala.danio(danio)
 		bala.tipoArma("espada")  // Indica que la bala fue disparada por una espada
-		danio += municionBase
+		bulletManager.addBullet(bala)  // Añadimos la bala al bulletManager
 	}
 	
 	override method recargar() {
-		return null
+		if (municionDisponible - municionUtilizable < 0) {
+			municionUtilizable += municionDisponible
+			municionDisponible = 0
+			return municionUtilizable
+		}
+		else {
+			municionDisponible -= (municionBase - municionUtilizable)
+			municionUtilizable += (municionBase - municionUtilizable)
+			return municionUtilizable	
+		}
 	}
 	
 	method image() = "sprites/weapons/sword_normal.png"
@@ -132,10 +149,10 @@ class Fusil inherits Armas {
 	
 	
 	override method usar(posicion, dir) {
-		bulletManager.shootBullet(posicion, dir, danio)
+		bulletManager.shootBullet(posicion, dir, danio, "fusil")
+		//bulletManager.tipoArma("fusil")  // Indica que la bala fue disparada por un fusil
 		municionUtilizable -= 1
 	}
-	
 	override method recargar() {
 		if (municionDisponible - municionUtilizable < 0) {
 			municionUtilizable += municionDisponible
@@ -173,20 +190,12 @@ object bulletManager {
 		})
 	}
 	
-	method shootBullet(pos, dir, danio) {
+	method shootBullet(pos, dir, danio, tipo) {
 		balas.get(puntero).position(pos)
 		balas.get(puntero).direction(dir)
 		balas.get(puntero).danio(danio)
+		balas.get(puntero).tipoArma(tipo)
 		self.proxBala()
-	}
-	
-	method attackSword(pos, dir, danio){
-		var bala = balas.get(puntero)
-		bala.position(pos)
-		bala.direction(dir)
-		bala.danio(danio)
-		self.proxBala()
-		return bala  // Devuelve la bala que se está disparando
 	}
 	
 	method removeBullet(b) {
@@ -199,6 +208,11 @@ object bulletManager {
 	
 	method resetBullets() {
 		balas.forEach({b => b.position(game.at(-1, -1))})
+	}
+	
+	method addBullet(bala) {
+		balas.add(bala)
+		game.addVisual(bala)
 	}
 }
 
@@ -225,20 +239,34 @@ class Bala {
 	
 	method image() = sprite.image()
 	
-	method moverBala() {
-		
-		if (not self.outsideScreen() and (tipoArma != "espada" or pasos <= 1)) { // Solo mueve las balas si están dentro de la pantalla y no han superado el límite de pasos (si fueron disparadas por una espada)
-	 //Solo mueve las balas si estan dentro de la pantalla, para que no se acumulen los objetos Position()
-			if (direction == 0) position = position.up(1)
-			if (direction == 1) position = position.right(1)
-			if (direction == 2) position = position.down(1)
-			if (direction == 3) position = position.left(1)
-		pasos+= 1   // Incrementa el contador de pasos
+method moverBala() {
+		if (tipoArma == "espada") {
+			// Mueve la bala y verifica los pasos
+			if (pasos < 2) {  // Reducimos el número de pasos para las balas de la espada
+				self.moverBalaSegunDireccion()
+				pasos += 1  // Incrementa el contador de pasos
+			} else {
+				bulletManager.removeBullet(self) // Elimina la bala si ha superado el límite de pasos
+			}
 		} else {
-			bulletManager.removeBullet(self)
-			pasos = 0  // Elimina la bala si ha superado el límite de pasos o está fuera de la pantalla
+			// Para balas de otras armas, mover solo si están dentro de la pantalla
+			if (!self.outsideScreen()) {
+				self.moverBalaSegunDireccion()
+			} else {
+				bulletManager.removeBullet(self) // Elimina la bala si está fuera de la pantalla
+			}
 		}
-	}
+		}
+
+method moverBalaSegunDireccion() {
+    // Mueve la bala según la dirección
+    if (direction == 0) position = position.up(1)
+    if (direction == 1) position = position.right(1)
+    if (direction == 2) position = position.down(1)
+    if (direction == 3) position = position.left(1)
+}
+
+
 	
 	method outsideScreen() {
 		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()

@@ -21,7 +21,7 @@ program main {
 	game.addVisual(player)
 	world.player(player)
 	
-	gui.player (player)
+	gui.player(player)
 	gui.init()
 	
 	game.start()
