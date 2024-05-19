@@ -277,16 +277,9 @@ object HabitacionPowerup inherits TipoHabitacion {
 		]),
 		new Template(entradas = [
 			[1003, new Position(x = 7, y = 11)]
-		])
-		,
+		]),
 		new Template(entradas = [
 			[1501, new Position(x = 7, y = 11)]
-		]),
-		new Template(entradas = [
-			[1502, new Position(x = 7, y = 11)]
-		]),
-		new Template(entradas = [
-			[1503, new Position(x = 7, y = 11)]
 		])
 		
 	]
