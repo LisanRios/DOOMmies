@@ -12,7 +12,7 @@ import audio.*
 program main {
 	game.width(15)
 	game.height(15)
-	
+
 	world.generateWorld(10)
 	
 	game.title("League of Legends")
@@ -21,7 +21,7 @@ program main {
 	game.addVisual(player)
 	world.player(player)
 	
-	gui.player (player)
+	gui.player(player)
 	gui.init()
 	
 	game.start()

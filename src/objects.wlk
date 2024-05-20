@@ -2,6 +2,13 @@ import wollok.game.*
 import world.*
 import graphics.*
 
+/*
+ * ME OLVIDE DE DECIR
+ * Antes de crear nuevas balas, acuerdense de usar el sistema de pooling que hice por razones de rendimiento
+ * Asi que cada vez que necesiten crear una nueva bala, en vez de instanciar una bala usen el metodo shootBullet de bulletManager
+ * y en vez de remover el visual de la bala usen el metodo removeBullet de bulletManager
+ */
+
 //Clase madre para los pickups de arma y curacion
 class Pickup {
 	var property position = game.at(0,0)
@@ -64,11 +71,10 @@ class Escopeta inherits Armas {
 		municionDisponible += cant
 	}
 	
-
-	
 	override method usar(posicion, dir) {
-		bulletManager.shootBullet(posicion, dir, danio)
-		//municionUtilizable -= 1
+		bulletManager.shootBullet(posicion, dir, BalaEscopeta)
+		//bulletManager.tipoArma("escopeta")  // Indica que la bala fue disparada por una escopeta
+		municionUtilizable -= 1
 	}
 	
 	override method recargar() {
@@ -91,8 +97,9 @@ class Espada inherits Armas {
 	var property playerSprite = "sprites/player/player_5.png"
 	
 	const property municionBase = 0
-	var municionUtilizable = 5
-	var danio = 5
+	var municionUtilizable = 50
+	var municionDisponible = 0
+	var danio = 15
 	
 	override method municion() = null
 	
@@ -101,14 +108,22 @@ class Espada inherits Armas {
 	override method agregarMunicion(cant) {
 		danio += cant
 	}
-	
+
 	override method usar(posicion, dir) {
-	
-		danio += municionBase
+		bulletManager.shootBullet(posicion, dir, BalaEspada)
 	}
 	
 	override method recargar() {
-		return null
+		if (municionDisponible - municionUtilizable < 0) {
+			municionUtilizable += municionDisponible
+			municionDisponible = 0
+			return municionUtilizable
+		}
+		else {
+			municionDisponible -= (municionBase - municionUtilizable)
+			municionUtilizable += (municionBase - municionUtilizable)
+			return municionUtilizable	
+		}
 	}
 	
 	method image() = "sprites/weapons/sword_normal.png"
@@ -132,10 +147,10 @@ class Fusil inherits Armas {
 	
 	
 	override method usar(posicion, dir) {
-		bulletManager.shootBullet(posicion, dir, danio)
+		bulletManager.shootBullet(posicion, dir, BalaFusil)
+		//bulletManager.tipoArma("fusil")  // Indica que la bala fue disparada por un fusil
 		municionUtilizable -= 1
 	}
-	
 	override method recargar() {
 		if (municionDisponible - municionUtilizable < 0) {
 			municionUtilizable += municionDisponible
@@ -152,10 +167,8 @@ class Fusil inherits Armas {
 	method image() = "sprites/weapons/fusil.png"
 }
 
-/*
- * ANTES DE TOCAR NADA LEER
- * 
- */
+
+
 
 object bulletManager {
 	var cantidadBalas = 12
@@ -172,10 +185,13 @@ object bulletManager {
 		})
 	}
 	
-	method shootBullet(pos, dir, danio) {
+	method shootBullet(pos, dir, tipo) {
 		balas.get(puntero).position(pos)
 		balas.get(puntero).direction(dir)
-		balas.get(puntero).danio(danio)
+		balas.get(puntero).danio(tipo.danio())
+		balas.get(puntero).velocidad(tipo.velocidad())
+		balas.get(puntero).tipo(tipo)
+		balas.get(puntero).pasos(0)
 		self.proxBala()
 	}
 	
@@ -190,10 +206,16 @@ object bulletManager {
 	method resetBullets() {
 		balas.forEach({b => b.position(game.at(-1, -1))})
 	}
+	
+	method addBullet(bala) {
+		balas.add(bala)
+		game.addVisual(bala)
+	}
 }
 
 class Bala {
-	var property danio = 10000 
+	var property danio = 10000 	
+	var property tipo = BalaFusil 
 	var sprite = new AnimatedSprite(frame_duration = 100, images = [
 		"sprites/weapons/bala_0.png",
 		"sprites/weapons/bala_1.png",
@@ -204,6 +226,8 @@ class Bala {
 	
 	var property position = game.at(0,0)
 	var property direction = 0
+	var property pasos = 0 
+	var velocidad = 200
 	
 	method initialize() {
 		spriteManager.setSprite(sprite)
@@ -211,29 +235,66 @@ class Bala {
 		game.onTick(200, self.identity().toString()+"_moverTiro", { => self.moverBala() }) //Hace un evento para mover por instancia
 	}
 	
+	method velocidad(vel) {
+		game.removeTickEvent(self.identity().toString()+"_moverTiro")
+		game.onTick(vel, self.identity().toString()+"_moverTiro", { => self.moverBala() }) //Hace un evento para mover por instancia
+	}
+	
 	method image() = sprite.image()
 	
 	method moverBala() {
-		if (not self.outsideScreen()){ //Solo mueve las balas si estan dentro de la pantalla, para que no se acumulen los objetos Position()
-			if (direction == 0) position = position.up(1)
-			if (direction == 1) position = position.right(1)
-			if (direction == 2) position = position.down(1)
-			if (direction == 3) position = position.left(1)
+		if (self.outsideScreen()) {return 0}
+		
+		// Mueve la bala y verifica los pasos
+		if (pasos < tipo.maxPasos()) {  // Reducimos el número de pasos para las balas de la espada
+			self.moverBalaSegunDireccion()
+			pasos += 1  // Incrementa el contador de pasos
+		} 
+		else {
+			bulletManager.removeBullet(self) // Elimina la bala si ha superado el límite de pasos
 		}
+
+		return 0
 	}
 	
+	method moverBalaSegunDireccion() {
+	    // Mueve la bala según la dirección
+	    if (direction == 0) position = position.up(1)
+	    if (direction == 1) position = position.right(1)
+	    if (direction == 2) position = position.down(1)
+	    if (direction == 3) position = position.left(1)
+	}
+
 	method outsideScreen() {
 		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()
 	}
 	
-	method collide(p) {} //NO TOCAR :) O LOS MATO
+	method collide(p) {} //NO TOCAR :) O LOS MATO (si el jugador toca una bala no pasa nada)
+}
+
+object BalaFusil {
+	const property maxPasos = 14
+	const property danio = 10
+	const property velocidad = 50
+}
+
+object BalaEscopeta {
+	const property maxPasos = 6
+	const property danio = 20
+	const property velocidad = 90
+}
+
+object BalaEspada {
+	const property maxPasos = 2
+	const property danio = 15
+	const property velocidad = 150
 }
 
 class BotiquinP inherits Curacion {
 	const salud = 25
 	var numero = 0
 
-	method image() = "sprites/healing/botiquin " +numero+ ".png"
+	method image() = "sprites/healing/botiquin0.png"
 	
 	
 	override method collide(player){
@@ -247,7 +308,7 @@ class BotiquinM inherits Curacion {
 	const salud = 50
 	const numero = 1
 		
-	method image() = "sprites/healing/botiquin " +numero+ ".png"
+	method image() = "sprites/healing/botiquin1.png"
 		
 	override method collide(player){
 		super(player)
@@ -260,7 +321,7 @@ class BotiquinG inherits Curacion {
 	const salud = 75
 	const numero = 2
 	
-	method image() = "sprites/healing/botiquin " +numero+ ".png"
+	method image() = "sprites/healing/botiquin2.png"
 	
 		
 	override method collide(player){
