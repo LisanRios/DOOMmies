@@ -192,7 +192,6 @@ object bulletManager {
 		balas.get(puntero).velocidad(tipo.velocidad())
 		balas.get(puntero).tipo(tipo)
 		balas.get(puntero).pasos(0)
-		balas.get(puntero).danio(danio) 
 		self.proxBala()
 	}
 	
@@ -216,8 +215,7 @@ object bulletManager {
 
 class Bala {
 	var property danio = 10000 	
-	var property tipo = BalaFusil 
-	var sprite = new AnimatedSprite(frame_duration = 100, images = [
+	var property tipo = BalaNula //Leer BalaNula antes de tocar aca
 	var sprite = new AnimatedSprite(frame_duration = 100, images=[
 		"sprites/weapons/bala_0.png",
 		"sprites/weapons/bala_1.png",
@@ -274,6 +272,14 @@ class Bala {
 	method collide(p) {} //NO TOCAR :) O LOS MATO (si el jugador toca una bala no pasa nada)
 }
 
+object BalaNula {
+	const property maxPasos = 0//vi que hay un error en la generacion de balas 
+	const property danio = 0//despues de pensar y no encontrar solucion tome la siguite desicion
+	const property velocidad = 0 //el problema consistia en una bala repetida que era igual a la espada
+	// entonces cree BalaNula la cual no hace nada para hacer desaparecer la bala repetida.
+	// PD : no lloren que funciona.
+}
+
 object BalaFusil {
 	const property maxPasos = 14
 	const property danio = 10
@@ -291,7 +297,7 @@ object BalaEspada {
 	const property danio = 15
 	const property velocidad = 150
 	method collide(enemigo) {
-		enemigo.defensa(player.saberArma())
+		enemigo.defensa(danio)
 		game.removeVisual(self)
 		world.removeObjetoHabitacionActual(self)
 	}
@@ -301,8 +307,6 @@ object BalaEspada {
 class BotiquinP inherits Curacion {
 	const salud = 25
 	var numero = 0
-
-	method image() = "sprites/healing/botiquin0.png"
 
 	method image() = "sprites/healing/botiquin" +numero+ ".png"
 	
@@ -318,7 +322,6 @@ class BotiquinM inherits Curacion {
 	const salud = 50
 	const numero = 1
 		
-	method image() = "sprites/healing/botiquin1.png"
 	method image() = "sprites/healing/botiquin" +numero+ ".png"
 		
 	override method collide(player){
@@ -332,7 +335,6 @@ class BotiquinG inherits Curacion {
 	const salud = 75
 	const numero = 2
 	
-	method image() = "sprites/healing/botiquin2.png"
 	method image() = "sprites/healing/botiquin" +numero+ ".png"
 	
 		
