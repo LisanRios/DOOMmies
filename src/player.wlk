@@ -24,8 +24,33 @@ class Player {
 		}
 
 	method ataque(dir) {
+<<<<<<< Updated upstream
         armaEquipada.usar(position, dir)
+=======
+        armaEquipada.usar(position, dir )
+        	
+        	
+        var bala = new Bala()
+    	bala.position(position) // La posición inicial de la bala es la misma que la del jugador
+    	bala.direction(dir) // La dirección de la bala es la misma que la dirección del ataque
+		bala.danio(armaEquipada.danio())
+		
+    	// Agregar la bala al juego
+    	game.addVisual(bala)
+
+    	// Mover la bala
+    	bala.moverBala()
+    	
+    	
+>>>>>>> Stashed changes
 	}
+
+	method saberArma(){
+		var arma = self.armaEquipada()
+		return arma.danio()
+	}
+	
+	
 	method defensa(danio){}
 	
 	method dropArmaEquipada() {

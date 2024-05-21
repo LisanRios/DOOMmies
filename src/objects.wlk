@@ -188,10 +188,14 @@ object bulletManager {
 	method shootBullet(pos, dir, tipo) {
 		balas.get(puntero).position(pos)
 		balas.get(puntero).direction(dir)
+<<<<<<< Updated upstream
 		balas.get(puntero).danio(tipo.danio())
 		balas.get(puntero).velocidad(tipo.velocidad())
 		balas.get(puntero).tipo(tipo)
 		balas.get(puntero).pasos(0)
+=======
+		balas.get(puntero).danio(danio) 
+>>>>>>> Stashed changes
 		self.proxBala()
 	}
 	
@@ -214,9 +218,13 @@ object bulletManager {
 }
 
 class Bala {
+<<<<<<< Updated upstream
 	var property danio = 10000 	
 	var property tipo = BalaFusil 
 	var sprite = new AnimatedSprite(frame_duration = 100, images = [
+=======
+	var sprite = new AnimatedSprite(frame_duration = 100, images=[
+>>>>>>> Stashed changes
 		"sprites/weapons/bala_0.png",
 		"sprites/weapons/bala_1.png",
 		"sprites/weapons/bala_2.png",
@@ -269,6 +277,7 @@ class Bala {
 		return position.x() < 0 or position.y() < 0 or position.x() >= game.width() or position.y() >= game.height()
 	}
 	
+<<<<<<< Updated upstream
 	method collide(p) {} //NO TOCAR :) O LOS MATO (si el jugador toca una bala no pasa nada)
 }
 
@@ -288,13 +297,25 @@ object BalaEspada {
 	const property maxPasos = 2
 	const property danio = 15
 	const property velocidad = 150
+=======
+	method collide(enemigo) {
+		enemigo.defensa(player.saberArma())
+		game.removeVisual(self)
+		world.removeObjetoHabitacionActual(self)
+	}
+	
+>>>>>>> Stashed changes
 }
 
 class BotiquinP inherits Curacion {
 	const salud = 25
 	var numero = 0
 
+<<<<<<< Updated upstream
 	method image() = "sprites/healing/botiquin0.png"
+=======
+	method image() = "sprites/healing/botiquin" +numero+ ".png"
+>>>>>>> Stashed changes
 	
 	
 	override method collide(player){
@@ -308,7 +329,11 @@ class BotiquinM inherits Curacion {
 	const salud = 50
 	const numero = 1
 		
+<<<<<<< Updated upstream
 	method image() = "sprites/healing/botiquin1.png"
+=======
+	method image() = "sprites/healing/botiquin" +numero+ ".png"
+>>>>>>> Stashed changes
 		
 	override method collide(player){
 		super(player)
@@ -321,7 +346,11 @@ class BotiquinG inherits Curacion {
 	const salud = 75
 	const numero = 2
 	
+<<<<<<< Updated upstream
 	method image() = "sprites/healing/botiquin2.png"
+=======
+	method image() = "sprites/healing/botiquin" +numero+ ".png"
+>>>>>>> Stashed changes
 	
 		
 	override method collide(player){
