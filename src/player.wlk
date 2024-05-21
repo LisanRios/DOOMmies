@@ -25,7 +25,7 @@ class Player {
 
 	method ataque(dir) {
         armaEquipada.usar(position, dir)
-        armaEquipada.usar(position, dir )
+        /*armaEquipada.usar(position, dir )
         	
         	
         var bala = new Bala()
@@ -39,7 +39,7 @@ class Player {
     	// Mover la bala
     	bala.moverBala()
     	
-    	
+    	*/
 	}
 
 	method saberArma(){
