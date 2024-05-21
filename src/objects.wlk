@@ -73,7 +73,6 @@ class Escopeta inherits Armas {
 	
 	override method usar(posicion, dir) {
 		bulletManager.shootBullet(posicion, dir, BalaEscopeta)
-		//bulletManager.tipoArma("escopeta")  // Indica que la bala fue disparada por una escopeta
 		municionUtilizable -= 1
 	}
 	
@@ -148,7 +147,6 @@ class Fusil inherits Armas {
 	
 	override method usar(posicion, dir) {
 		bulletManager.shootBullet(posicion, dir, BalaFusil)
-		//bulletManager.tipoArma("fusil")  // Indica que la bala fue disparada por un fusil
 		municionUtilizable -= 1
 	}
 	override method recargar() {

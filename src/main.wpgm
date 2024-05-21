@@ -1,4 +1,21 @@
-// NOOOOOOOOOOOOOOOOOOO PORQUE SACARON EL COMENTARIO :((((((((((((((((((((
+//                                        |
+//                                        |
+//                                        |
+//                                        |
+//                                        |
+//                                        |
+//                                        V
+//
+// ----------------> El que escriba "new Bala()" vuelve a labo 2 <-----------------------
+//
+//                                        A
+//                                        |
+//                                        |
+//                                        |
+//                                        |
+//                                        |
+//                                        |
+// Usen bulletManager.shootBullet :)
 
 import wollok.game.*
 import world.*

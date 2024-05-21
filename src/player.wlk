@@ -25,21 +25,6 @@ class Player {
 
 	method ataque(dir) {
         armaEquipada.usar(position, dir)
-        /*armaEquipada.usar(position, dir )
-        	
-        	
-        var bala = new Bala()
-    	bala.position(position) // La posición inicial de la bala es la misma que la del jugador
-    	bala.direction(dir) // La dirección de la bala es la misma que la dirección del ataque
-		bala.danio(armaEquipada.danio())
-		
-    	// Agregar la bala al juego
-    	game.addVisual(bala)
-
-    	// Mover la bala
-    	bala.moverBala()
-    	
-    	*/
 	}
 
 	method saberArma(){
@@ -114,8 +99,6 @@ class Player {
 		keyboard.d().onPressDo({self.move(1)})
 		keyboard.s().onPressDo({self.move(2)})
 		keyboard.a().onPressDo({self.move(3)})	
-		//keyboard.z().onPressDo({self.ataque(escopeta)}) // Ataque con Escopeta
-    	//keyboard.x().onPressDo({self.ataque(espada)})   // Ataque con Espada
     	keyboard.up().onPressDo({self.ataque(0)}) 
     	keyboard.right().onPressDo({self.ataque(1)}) 
     	keyboard.down().onPressDo({self.ataque(2)}) 
