@@ -24,9 +24,7 @@ class Player {
 		}
 
 	method ataque(dir) {
-<<<<<<< Updated upstream
         armaEquipada.usar(position, dir)
-=======
         armaEquipada.usar(position, dir )
         	
         	
@@ -42,7 +40,6 @@ class Player {
     	bala.moverBala()
     	
     	
->>>>>>> Stashed changes
 	}
 
 	method saberArma(){
